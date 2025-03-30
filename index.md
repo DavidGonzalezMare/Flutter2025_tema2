@@ -1,42 +1,38 @@
-﻿*El lenguaje Dart*
+﻿# Unidad 2. El lenguaje Dart
 
-Unidad 2. El lenguaje Dart
-
-![Logotipo
-
-Descripción generada automáticamente](Aspose.Words.5a52b982-95eb-4a5e-86e9-0cfc7291d183.001.png)
+![Dart](./images/imagen1.png)
 
 El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer una breve introducción a este lenguaje y a sus principales características, con especial atención a la programación orientada a objetos, y a los mecanismos que se ofrecen para la programación asíncrona, de gran importancia en el desarrollo de interfaces dinámicas en Flutter.
 
-[Introducción a Dart	2******](#_toc182320686)***
+[*1. Introducción a Dart	2*](#_apartado1)
 
-[***Tipos de Datos	4******](#_toc182320687)
+[*2. Tipos de Datos*](#_apartado2)
 
-[***Programación Estructurada	8******](#_toc182320688)
+[*3. Programación Estructurada*](#_apartado3)
 
-[***Funciones	11******](#_toc182320689)
+[*4. Funciones*](#_toc182320689)
 
-[***Colecciones	14******](#_toc182320690)
+[*5. Colecciones*](#_toc182320690)
 
-[***Programación Orientada a Objetos	19******](#_toc182320691)
+[*6. Programación Orientada a Objetos*](#_toc182320691)
 
-[***Programación Asíncrona	31******](#_toc182320692)
+[*7. Programación Asíncrona*](#_toc182320692)
 
-[***Proyectos en Dart	36******](#_toc182320693)
+[*8. Proyectos en Dart*](#_toc182320693)
 
-[***Peticiones HTTP	39******](#_toc182320694)
-
-
+[*9. Peticiones HTTP*](#_toc182320694)
 
 
-1. # <a name="_toc182320551"></a><a name="_toc182320686"></a>Introducción a Dart
+
+
+# <a name="_apartado1"></a>1. Introducción a Dart
 
 ## El lenguaje Dart
 El lenguaje utilizado para el desarrollo en Flutter es Dart, y por eso antes de entrar con la programación de lleno con el framework, nos familiarizaremos un poco con éste.
 
-Para trabajar con los diferentes ejemplos que veremos en esta unidad, solo tenemos que escribirlos en un fichero de texto con extensión **dart***.*
+Para trabajar con los diferentes ejemplos que veremos en esta unidad, solo tenemos que escribirlos en un fichero de texto con extensión **dart**.
 
-dart nombre\_de\_fichero.dart
+`dart nombre\_de\_fichero.dart`
 
 Alternativamente, también podemos trabajar con el [Playground de Dart](https://dartpad.dev/). Éste, además, tiene la ventaja que incluye en la misma ventana el editor de código con resaltado de sintaxis y detección de errores, la salida del programa, documentación y algunos ejemplos, tanto con Dart como con Flutter para explorar las diferentes posibilidades de los mismos.
 
@@ -44,9 +40,20 @@ Alternativamente, también podemos trabajar con el [Playground de Dart](https://
 
 Como muchos otros lenguajes, Dart utiliza la función *main* como punto de entrada a un programa. Partiremos de un clásico *Hola Mundo* con parámetros de entrada como ejemplo inicial:
 
+```dart
+void main(List<String> args){
+  // Exemple d'Hola Món
+    if (args.isNotEmpty) {
+      print ("Hola ${args[0]}");
+    } else  {
+      print("Hola món!");
+    } 
+}
+```
+
 Vemos algunos detalles de Dart en este código:
 
-- La función **main** no vuelve ningún valor, y aunque el tipo **void** no es obligatorio indicarlo, suele ser una buena práctica hacerlo. 
+- La función **main** no devuelve ningún valor, y aunque el tipo **void** no es obligatorio indicarlo, suele ser una buena práctica hacerlo. 
 - Esta función principal puede recibir argumentos, en forma de lista de cadena de caracteres (**List<String> args**). En caso de que no necesitemos argumentos, podemos usar directamente **void main().**
 - Para comprobar si la lista está vacía, aunque podríamos haber comprobado si su longitud es positiva (**args.length>0**) es más correcto hacer uso de **isNotEmpty**.
 - Los bloques de código deben incluirse entre llaves {}. Cuando el bloque sólo se compone de una línea de código (como es el caso de los dos **print()** al ejemplo), aunque no es obligatorio, también se aconseja hacerlo.
@@ -62,32 +69,30 @@ Dart provee a través de la biblioteca *dart:io* mecanismos para gestionar la en
 
 Veamos un pequeño ejemplo:
 
+```dart
 import 'dart:io';
 
 void main(){
-
-`  `stdout.write("Hola! Com et diuen? ");
-
-`  `var nom=stdin.readLineSync();
-
-`  `print("Hola $nom!");
-
+  stdout.write("Hola! Cómo te llamas? ");
+  var name=stdin.readLineSync();
+  print("Hola $name!");
 }
+```
 
 La salida de este programa será la siguiente:
 
+```
 $ dart exemple.dart 
-
-Hola! Com et diuen? Jose 
-
+Hola! Cómo te llamas? Jose 
 Hola Jose!
+```
 
 Como podréis apreciar, la principal diferencia entre el método **stdout.write** y **print** es que el primero no arroja un salto de línea al final, mientras **print** sí lo hace.
 
 Hay que decir que, la clase Stdin permite al usuario leer datos de la entrada estándar de manera tanto síncrona como asíncrona. Tal y como hemos visto, con el fin de realizar la lectura desde el teclado de forma síncrona, haremos uso del método **readLineSync().**
 
 
-1. # <a name="_toc182320552"></a><a name="_toc182320687"></a>Tipos de Datos
+# <a name="_apartado2"></a>2. Tipos de Datos
 
 Los tipos de datos soportados por Dart son:
 
@@ -98,25 +103,24 @@ Los tipos de datos soportados por Dart son:
 
 Para declarar una variable con Dart podemos utilizar **var**, de manera que el tipo de dato se infiera forma automática a partir del valor dado, o bien indicar directamente el tipo. Una vez se asigna un tipo a una variable, este tipo ya no se puede modificar. Veamos algunos ejemplos:
 
-var dia='dijous';       // Infereix el tipus a String
+```dart
+var dia='jueves';       // Infiere el tipo a String
+String dia='martes';   // Definimos un String
+int numero=42;          // Definimos un entero
+bool laborable=true;    // Definimos un valor bool
 
-String dia='dimarts';   // Definim un String
-
-int numero=42;          // Definim un enter
-
-bool laborable=true;    // Definim un valor lògic
-
-// També podem realitza conversions de tipus
-
-String cadena\_numero="1";               // Definim un String que conté un número
-
-int numero2=int.parse(cadena\_numero);   // Converteix la cadena "1" a un tipus numèric
+// También podemos realizar conversiones de tipo
+String cadena_numero="1";               // Definimos un String que contiene un número
+int numero2=int.parse(cadena_numero);   // Convierte la cadena "1" a un tipo numérico
+```
 
 ### **Constantes y finales**
 
 Para definir **constantes** utilizaremos la palabra reservada **const**, con la que declaramos un valor en tiempo de compilación que será inmutable y no podrá ser reasignado:
 
-const curs='Flutter'
+```
+const curso='Flutter'
+```
 
 Además, también podemos declarar datos como **final**, para indicar que no podrán ser reasignados. La diferencia con las constantes es que **un objeto declarado como *final*, aunque no pueda ser reasignado, sí es mutable**, es decir, sí pueden cambiar las propiedades internas. Por ejemplo, si definimos una lista como constante, no podremos añadirle elementos, pero si la declaramos como final, aunque no podamos asignarle otra lista, sí podremos añadir elementos.
 
@@ -130,67 +134,61 @@ Vemos los diferentes operadores con los que podemos tratar los nulos con Dart:
 
 - **Declaración de valor *nullable* (?)**: Si queremos indicar de manera explícita que una variable puede contener valores nulos, hacemos uso del interrogante en su declaración, tal y como se hace en otros lenguajes como Kotlin:
 
-  int? variable1; // variable1 podrà contenir el valor null
+```dart
+  int? variable1; // variable1 podrá tener el valor null
+  ```
 
 - **Operador de aserción nula (*null assertion operator*) (!)**: Se utiliza cuando queremos asignar una variable que puede contener nulos a variables que no pueden contenerlas.
 
-  int variable2=variable1!
+`int variable2=variable1!`
 
 Ejemplo:
 
+```dart
 int? variable1;
-
 int variable2=variable1!; // TypeError: null has no 
-
-print(variable2);         // propertiesError: TypeError:
-
-`                          `// null has no properties
+print(variable2);         // propertiesError: TypeError:
+                          // null has no properties
+```
 
 - El error de arriba detiene la ejecución del programa. Con el fin de gestionar las excepciones que se realizan, podemos hacer uso de bloques *try-catch*, como en otros lenguajes de programación.
 
+```dart
 int? variable1;
-
 try{
-
-`  `int variable2=variable1!; 
-
-`  `print(variable2);         
-
+  int variable2=variable1!; 
+  print(variable2);         
 } catch (e){
-
-`    `print(e.runtimeType); // -> NullError
-
-`    `print(e);             // -> NoSuchMethodError: t1 is null
-
+    print(e.runtimeType); // -> NullError
+    print(e);             // -> NoSuchMethodError: t1 is null
 }
+```
 
 - **Operador nulo (??)**: Este operador devuelve el valor resultante de la expresión de la parte izquierda del operador, siempre que no sea nulo. En caso contrario nos devolverá la expresión de la derecha. Podemos verlo como una especie de operador condicional a los valores nulos:
 
+```dart
 var nom;
-
-// Escriu el nom si no és nul, o escriu "Anònim"
-
-print(nom ?? "Anònim");
+// Escribe el nombre si no el nulo, o escriu "Anónimo"
+print(nom ?? "Anónimo");
+```
 
 - **Asignación consciente de nulos *(null aware assignment)* (?? =)**: Asigna un valor a una variable si ésta tiene valor *nulo*. En caso de que la variable tenga un valor previamente diferente a *null*, no se asignará.
 
-int? variable1;   // Si no indiquem nullable donaría error
-
-print(variable1); // Mostra null
-
+```dart
+int? variable1;   // Si no indicamos nullable daría error
+print(variable1); // Muestra null
 variable1 ??= 10; 
-
-print(variable1); // Mostra "10"
-
+print(variable1); // Muestra "10"
 variable1 ??= 15; 
-
-print(variable1); // Mostra "10", ja que variable1 tenia ja valor.
+print(variable1); // Muestra "10", ya que variable1 ya tenia valor.
+```
 
 - **Acceso consciente de nulos *(null-aware access)***(?.): Evita que se lance una excepción cuando se accede a una propiedad o método de un objeto que puede ser nulo.
 
+```dart
 String? cadena;
-
 print (cadena?.length);
+```
 
 ### **El tipo *dynamic***
 
@@ -198,7 +196,7 @@ Dart es un lenguaje que soporta tanto tipado estático como dinámico. Cuando ha
 
 Para ello, se hace uso del tipo **dynamic**, un tipo de dato subyacente a todos los objetos Dart, y que nos permite utilizar tipado dinámico de datos, de manera que la comprobación de estos tipos se realiza en tiempo de ejecución en lugar de tiempo de compilación.
 
-Tenim més detalls à l'article [Dart es un lenguaje de programación de tipo estático o dinámico](https://medium.com/@farhanaslam910/dart-is-a-static-or-dynamic-typed-programming-language-3d934c95b7b)
+Tenemos más detalles al artículo [Dart es un lenguaje de programación de tipo estático o dinámico](https://medium.com/@farhanaslam910/dart-is-a-static-or-dynamic-typed-programming-language-3d934c95b7b)
 
 ### **Tipos enumerados**
 
@@ -206,22 +204,28 @@ Los tipos enumerados en Dart (enum), como en otros lenguajes, nos sirven para re
 
 Por ejemplo, podemos definir un enumerado con los días de la semana:
 
-enum DiesSetmana { dilluns, dimarts, dimecres, dijous, divendres, dissabte, diumenge }
+```dart
+enum DiasSemana { lunes, martes, miercoles, jueves, viernes, sabado, domingo }
+```
 
 Internamente, cada uno de estos valores se representa por el índice que ocupa, siendo el primero el 0.
 
 Para acceder a estos valores, lo haremos a través de la notación punto. Por ejemplo:
 
-DiesSetmana dia=DiesSetmana.dilluns;
+```dart
+DiasSemana dia=DiasSemana.lunes;
+```
 
-Si queremos obtener una lista con los valores del enumerado, haremos uso de valijas:
+Si queremos obtener una lista con los valores del enumerado, haremos uso de `values`:
 
+```dart
 List<DiesSetmana> = DiesSetmana.values;
+```
 
 Un tipo enumerado, al igual que las clases, debe definirse fuera de cualquier función o clase.
 
 
-1. # <a name="_toc182320553"></a><a name="_toc182320688"></a>Programación Estructurada
+# <a name="_apartado3"></a>3. Programación Estructurada
 
 La programación estructurada con Dart se basa en las estructuras condicionales y de repetición habituales: *if.. else*, *switch*, *for*, *forEach* i *while*. Además, también soporta el operador condicional ternario (?).
 
