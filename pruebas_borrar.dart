@@ -8,17 +8,23 @@ void f2(int obligatorio, {int opcionalConNombre = 0}) {
 }
 
 void main() {
-  f1(1);    // Muestra: 1, 0
-  //f1();   // Si llamamos f1() sin argumentos, obtendremos
-            // el error: Context: Found this candidate,
-            // but the arguments don't match.
 
-  f1(1, 2); // Muestra:  1, 2
+Set laborables =
+      Set.from(['lunes', 'martes', 'miércoles', 'jueves', 'viernes']);
 
-  f2(1);    // Muestra: 1, 0
-
-  // f2(1, 2); // Si proporcionamos dos argumentos a f2, pero
-              // sin indicar el nombre, tendremos un error.
-
-  f2(1, opcionalConNombre: 3); // Muestra 1, 3
+for (String dia in laborables) {
+  print(dia);
 }
+
+laborables.forEach((dia) => print(dia));
+
+
+Map<String, int> notas = {"PMDM": 8, "AD": 9, "PSP": 9, "DI": 7};
+
+for (String modulo in notas.keys) {
+  print("Módulo: $modulo, nota: ${notas[modulo]}");
+}
+
+notas.forEach((key, value) => print("Módulo: $key, nota: $value"));
+}
+

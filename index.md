@@ -12,7 +12,7 @@ El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer un
 
 [*4. Funciones*](#_apartado4)
 
-[*5. Colecciones*](#_toc182320690)
+[*5. Colecciones*](#_apartado5)
 
 [*6. Programación Orientada a Objetos*](#_toc182320691)
 
@@ -504,7 +504,7 @@ funcioX(
 Como veremos posteriormente, esta será una construcción muy común cuando generemos componentes visuales con Flutter.
 
 
-1. # <a name="_toc182320555"></a><a name="_toc182320690"></a>Colecciones
+# <a name="_apartado5"></a>5. Colecciones
 
 Las colecciones son objetos que representan un grupo de elementos, y pueden tener diferentes estructuras y comportamientos. Las colecciones más habituales son las listas, los conjuntos y los mapas.
 
@@ -512,136 +512,111 @@ Las colecciones son objetos que representan un grupo de elementos, y pueden tene
 
 Dart utiliza el principio del *mismo nivel de abstracción*, según el cual, un código neto no debe mezclar instrucciones de alto nivel con instrucciones de bajo nivel en la implementación de su lógica, de manera que se facilite su lectura.
 
-Dart puede definirse como un lenguaje de alto nivel, y que no recurre a estructuras de bajo nivel como puedan ser los vectores, sino que directamente hace uso de listas (clase List) para representar colecciones ordenadas de elementos.
+Dart puede definirse como un lenguaje de alto nivel, y que no recurre a estructuras de bajo nivel como puedan ser los vectores, sino que directamente hace uso de listas (clase `List`) para representar colecciones ordenadas de elementos.
 
 No obstante, Dart facilita el acceso a listas como si trabajáramos con vectores, al tiempo que nos ofrece funciones de más alto nivel que nos permiten trabajar de manera más cómoda.
+
 ### **Creación de listas**
 Vemos algunas formas de definir listas:
 
-// Llista nul·la
+```dart
+// Lista nula
+List lista_nula;
 
-List llista\_nula;
+// Llista Vacía
+List listaVacia=[];
 
-// Llista Buida
+// Lista vacía especificando el tipo
+List<String> listaVaciaTipo=[];   // Forma 1
+List<String> _lista=<String>[];   // Forma 2
 
-List llistaBuida=[];
+// Lista con valores
+List laborables=['lunes' , 'martes', 'miércoles', 'jueves', 'viernes'];
 
-// Llista buida especificant el tipus
-
-List<String> llistaBuida=[];      // Forma 1
-
-List<String> \_llista=<String>[];  // Forma 2
-
-// Llista amb valors
-
-List laborals=['dilluns' , 'dimarts', 'dimecres', 'dijous', 'divendres'];
-
-// Llista amb valors especificant el tipus
-
-List<String> festius=['dissbte', 'diumenge'];
+// Lista con valores especificando el tipo
+List<String> festivos=['sábado', 'domingo'];
+```
 
 ### **Manipulación de listas**
+
 Y ahora vemos algunas formas de acceder y manipularlas:
 
-// Accés a una posició
+```dart
+// Acceso a una posición
+print(laborables[3]);
 
-print(laborals[3]);
+// Añadiendo elementos a la lista
+listaVacia.add("Elemento");
 
+// Modificando un elemento existente en la lista
+// Ha de existir!!
+listaVacia[0]="Elemento 2";
 
-// Afegint elements a la llista
+// Eliminar el último elemento de la lista
+laborables.removeLast();
 
-llistaBuida.add("Element");
+// Eliminando un elemento en una posición de la lista
+laborables.removeAt(posicion);
 
-// Modificant un element existent a la llista
-
-// Compte! Aquest element ha d'existir! No afig elements!
-
-llistaBuida[0]="Element 2";
-
-// Eliminant l'últim element de la llista
-
-laborals.removeLast();
-
-// Eliminant un element en una posició de la llista
-
-laborals.removeAt(posicio);
-
-// Ampliant una llista completa al final d'altra
-
-List diesSetmana=[];
-
-diesSetmana.addAll(laborals);
-
-diesSetmana.addAll(festius);
-
-print (diesSetmana);
-
-En aquest últim punt, per tal de poder usar **addAll**, necessitem que la llista estiga inicialitzada (no siga nul·la). Si haverem definit aquest llista com **a List diaSetmana**; ens haguera donat un error.
+// Añadiendo un lista completa al final de otra
+List diasSemana=[];
+diasSemana.addAll(laborables);
+diasSemana.addAll(festivos);
+print (diasSemana);
+```
+En este último punto, para poder utilizar `addAll`, necesitamos que la lista haya sido inicializada (no sea null).
 
 ## Sets (Conjuntos)
 
-Otra colección de elementos interesante en Dart son los *Sets* o conjuntos, que, a diferencia de las listas, no mantienen los elementos indexados y evitan así elementos duplicados.
+Otra colección de elementos interesante en Dart son los `Sets` o conjuntos, que, a diferencia de las listas, no mantienen los elementos indexados y evitan así elementos duplicados.
 
 Vemos algunos ejemplos sobre cómo definir y trabajar con conjuntos:
 
-// Declarem un conjunt a partir d'una llista
+```dart
+// Declaramos un conjunto a partir de una lista
+var modulos = Set.from(["PMDM", "AD", "PSP", "DI", "SGI"]);
 
-var moduls = Set.from(["PMDM", "AD", "PSP", "DI", "SGI"]);
+// Para añadir elementos utilizamos add:
+modulos.add("EIE");
 
-// Per afegir elements, fem ús d'add:
+// Los eliminamos con remove:
+modulos.remove("EIE");
 
-moduls.add("EIE");
-
-// I els eliminem amb remove:
-
-moduls.remove("EIE");
-
-// Per saber si existeix un element al conjunt fem ús de contains
-
-print (moduls.contains("EIE"));
-
-
+// contains nos permite ver si existe un elemento en el conjunto
+print (modulos.contains("EIE"));
+```
 
 ## Maps (Diccionarios)
 
-Un diccionario es una estructura de datos que almacena pares clave-valor, de manera parecida a un JSON.
+Un diccionario es una estructura de datos que almacena pares clave-valor, de manera parecida a un `JSON`.
 
 Vemos algunos ejemplos sobre cómo definir y trabajar con estas estructuras:
 
-// Definició d'un mapa i assignació de valors
+```dart
+// Definición de mapa y asignación de valores
+Map notas;
+notas={ "PMDM": 8, "AD": 9, "PSP":9, "DI":7};
 
-Map notes;
+// Acceso
+print(notas["PMDM"]);
+notas["DI"]=9;
 
-notes={ "PMDM": 8, "AD": 9, "PSP":9, "DI":7};
-
-// Accés
-
-print(notes["PMDM"]);
-
-notes["DI"]=9;
-
-// Definició del mapa especificant els tipus:
-
+// Definición del mapa especificando els tipo:
 Map<String, int> mapa2;
 
-// Definició del mapa especificant un tipus dinàmic per al valor
-
+// Definición del mapa especificando un tipo dinámico para el valor
 Map<String, dynamic> mapa3;
 
-// Afegint nous elements al mapa
+// Añadiendo nuevos elementos al mapa
+// Si ya existe la clave se modifica el valor
+notas["EIE"]=10;
 
-// Si ja existeix la clau, es modifica el valor
+// Eliminando elementos
+notas.remove("PMDM");
 
-notes["EIE"]=10;
-
-// Eliminant elements
-
-notes.remove("PMDM");
-
-// Per saber si un element existeix
-
-print (notes.containsKey("PMDM"));
-
+// Para saber si un elemento existe
+print (notas.containsKey("PMDM"));
+```
 
 ## Recorrido de estructuras
 
@@ -651,100 +626,104 @@ Con el fin de recorrer los diferentes tipos estructurados podemos hacer uso de b
 
 Si definimos, por ejemplo, la lista:
 
-List laborals = ['dilluns', 'dimarts', 'dimecre', 'dijous', 'divendres'];
+```dart
+List laborables=['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
+```
+
 
 Podemos recorrerla con un bucle **for.... in** de la siguiente manera:
 
-`  `for (String dia in laborals) {
-
-`    `print(dia);
-
-`  `}
+```dart
+for (String dia in laborables) {
+  print(dia);
+}
+```
 
 Y con un bucle forEach de la siguiente:
 
-`  `laborals.forEach((dia) {
+```dart
+laborables.forEach((dia) {
+  print(dia);
+});
+```
 
-`    `print(dia);
-
-`  `});
-
-El método **forEach** recibe como argumento una función anónima, que se invoca para cada uno de los elementos de la lista. Esta función anónima recibe como argumento el elemento en cuestión, y lo procesa dentro del cuerpo de la función. En este caso, este procesamiento consiste en imprimir el valor.
+El método `forEach` recibe como argumento una función anónima, que se invoca para cada uno de los elementos de la lista. Esta función anónima recibe como argumento el elemento en cuestión, y lo procesa dentro del cuerpo de la función. En este caso, este procesamiento consiste en imprimir el valor.
 
 Por otra parte, esta función anónima que proporcionamos al método forEach podría expresarse también como función flecha de la siguiente forma:
 
-laborals.forEach((dia) => print(dia));
+```dart
+laborables.forEach((dia) => print(dia));
+```
 
 
 **Recorrido de conjuntos** 
 
 El recorrido de conjuntos se realiza de la misma manera que las listas. Si definimos el siguiente conjunto a partir de una lista:
 
-Set laborals =
+```dart
+Set laborables =
+      Set.from(['lunes', 'martes', 'miércoles', 'jueves', 'viernes']);
+```
 
-`      `Set.from(['dilluns', 'dimarts', 'dimecres', 'dijous', 'divendres']);
+Su recorrido con un bucle `for.... in` será:
 
-
-Su recorrido con un bucle **for.... in** será:
-
-for (String dia in laborals) {
-
-`  `print(dia);
-
+```dart
+for (String dia in laborables) {
+  print(dia);
 }
+```
 
-Y con forEach, haciendo uso de una función flecha, sería:
+Y con `forEach`, haciendo uso de una función flecha, sería:
 
-laborals.forEach((dia) => print(dia));
+```dart
+laborables.forEach((dia) => print(dia));
+```
 
 **Recorrido de Maps**
 
 Definimos ahora un diccionario con módulos y sus calificaciones:
 
-Map<String, int> notes = {"PMDM": 8, "AD": 9, "PSP": 9, "DI": 7};
+```dart
+Map<String, int> notas = {"PMDM": 8, "AD": 9, "PSP": 9, "DI": 7};
+```
 
-Para recorrer este diccionario con un bucle **for.... in**, haremos uso de la propiedad **keys** del mapa, que nos proporciona una lista con las claves del mismo. Para mostrar las calificaciones para cada módulo, accederemos al valor de la clave en el diccionario:
+Para recorrer este diccionario con un bucle `for.... in`, haremos uso de la propiedad `keys` del mapa, que nos proporciona una lista con las claves del mismo. Para mostrar las calificaciones para cada módulo, accederemos al valor de la clave en el diccionario:
 
-for (String modul in notes.keys) {
-
-`  `print("Mòdul: $modul, nota: ${notes[modul]}");
-
+```dart
+for (String modulo in notas.keys) {
+  print("Módulo: $modulo, nota: ${notas[modulo]}");
 }
+```
 
-En cuanto al método **forEach** de los diccionarios, éste recibe dos argumentos en lugar de uno: la clave y el valor de cada uno de los elementos, de manera que para mostrar su contenido haríamos:
+En cuanto al método `forEach` de los diccionarios, éste recibe dos argumentos en lugar de uno: la clave y el valor de cada uno de los elementos, de manera que para mostrar su contenido haríamos:
 
-notes.forEach((key, value) => print("Mòdul: $key, nota: $value"));
-
+```dart
+notas.forEach((key, value) => print("Módulo: $key, nota: $value"));
+```
 
 **Mapeado de estructuras**
 
-Las colecciones en *Dart* poseen un método *map* para transformar unas estructuras en otras. Para ello, habrá que proporcionarle una función anónima que se aplicará a cada uno de los elementos para obtener el nuevo elemento correspondiente.
+Las colecciones en *Dart* poseen un método `map` para transformar unas estructuras en otras. Para ello, habrá que proporcionarle una función anónima que se aplicará a cada uno de los elementos para obtener el nuevo elemento correspondiente.
 
-Vemos con un ejemplo, cómo convertir un conjunto de *Strings* expresados en mayúscula, en una colección donde se expresan en minúscula.
+Vemos con un ejemplo, cómo convertir un conjunto de `Strings` expresados en mayúscula, en una colección donde se expresan en minúscula.
 
+```dart
 void main(){
 
-`  `// Definim un conjunt d'elements
+  // Definimos un conjunto de elementos
+  var modulos = Set.from(["PMDM", "AD", "PSP", "DI", "SGI"]);
+  print(modulos);
 
-`  `var moduls = Set.from(["PMDM", "AD", "PSP", "DI", "SGI"]);
+  // Utilizamos el método map para procesar
+  // cada uno de los elementos del conjunto
+  // (En este caso los convertimos a minúscula)
+  var modulos2=modulos.map((item) {
+    return item.toString().toLowerCase();
+    });
 
-`  `print(moduls);
-
-`  `// I are utilitzem el mètode map per processar
-
-`  `// cadascun dels elements del conjunt
-
-`  `// (En aquest cas, els convertim a minúscula)
-
-`  `var moduls2=moduls.map((item) {
-
-`    `return item.toString().toLowerCase();
-
-`    `});
-
-`    `print (moduls2);
-
+    print (modulos2);
 }
+```
 
 Disponemos de más documentación sobre colecciones e iterables en:
 
