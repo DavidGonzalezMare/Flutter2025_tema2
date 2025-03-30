@@ -10,7 +10,7 @@ El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer un
 
 [*3. Programación Estructurada*](#_apartado3)
 
-[*4. Funciones*](#_toc182320689)
+[*4. Funciones*](#_apartado4)
 
 [*5. Colecciones*](#_toc182320690)
 
@@ -231,357 +231,275 @@ La programación estructurada con Dart se basa en las estructuras condicionales 
 
 Vamos a ver algunos ejemplos comentados de estas estructuras:
 
-## Estructures condicionals
-- **Exemple 1: l'operador if/if-else**
+## Estructuras condicionales
 
-// Importem la llibreria dart:io, que conté
+**Ejemplo 1: el operador `if/if-else`**
 
-// la definició de la funció exit
-
+```dart
+// Importamos la librería dart:io, que contiene
+// la definición de la función exit
 import 'dart:io';
 
-// La funció principal comprova que haja
-
-// rebut un argument en la invocació
-
+// La función principal comprueba que haya
+// recibido un argumento en la llamada
 void main(List<String> args) {
+  // Ejemplo sencillo de if
+  if (args.length != 1) {
+    print("Error, hay que poner u argumento");
+    exit(1);
+  }
 
-`  `// Exemple d'if senzill
+  // Recogemos el valor del primer argumento
+  //Utilizamos un bloque try-catch por si
+  // hay una excepcion de tipo
 
-`  `if (args.length != 1) {
+  var temperatura;
+  try {
+    temperatura = int.parse(args[0]);
+  } catch (e) {
+    print("Se ha producido la excepción: ${e.toString()}");
+    exit(1);
+  }
 
-`    `print("Error, cal indicar un argument");
+  // Ejemplo de if-else
+  // Aunque no es necesario se recomienda
+  // utilizar siempre las llaves {}
 
-`    `exit(1);
+  if (temperatura > 21) {
+    print("Hace calor");
+  } else {
+    print("Hace fío");
+  }
 
-`  `}
+  // Ejemplo de operador condicional ternario
+  temperatura > 21 ? print("Hace calor") : print("Hace frío");
 
-`  `// Agafem el valor del primer argument
-
-`  `// Fem ús d'un bloc try-catch per si
-
-`  `// es produeix una excepció de tipus
-
-`  `var temperatura;
-
-`  `try {
-
-`    `temperatura = int.parse(args[0]);
-
-`  `} catch (e) {
-
-`    `print("S'ha produit l'excepció: ${e.toString()}");
-
-`    `exit(1);
-
-`  `}
-
-`  `// Exemple d'if-else
-
-`  `// Tot i que no és necessari, es recomana
-
-`  `// utilitzar sempre les claus {}
-
-`  `if (temperatura > 21) {
-
-`    `print("Fa calor");
-
-`  `} else {
-
-`    `print("Fa fred");
-
-`  `}
-
-`  `// Exemple d'operador condicional ternari
-
-`  `temperatura > 21 ? print("Fa calor") : print("Fa fred");
-
-`  `// Exemple d'if abreviat com a expressió (assignat a una variable)
-
-`  `var text = temperatura > 21 ? "Fa calor" : "Fa fred";
-
-`  `print(text);
-
+  // Ejemplo de if ternario como expresión para asignar a variable
+  var text = temperatura > 21 ? "HAce calor" : "Hace frío";
+  print(text);
 }
+```
 
 Para ejecutar el ejemplo anterior (si lo hemos llamado *ejemplo1.dart*), haremos:
 
-$ dart exemple1.dart temp
+```
+dart exemple1.dart temp
+```
 
 Siendo *temp* un valor numérico que represente una temperatura.
 
-- **Ejemplo 2: El operador switch**
+**Ejemplo 2: El operador switch**
 
-// Importem la llibreria dart:io, que conté
-
-// la definició de la funció exit
-
+```dart
+// Importamos la librería dart:io, que contiene
+// la definición de la función exit
 import 'dart:io';
 
-// La funció principal comprova que haja
-
-// rebut un argument en la invocació
-
+// La función principal comprueba que haya
+// recibido un argumento en la llamada
 void main(List<String> args) {
+  // Ejemplo sencillo de if
+  if (args.length != 1) {
+    print("Error, hay que poner u argumento");
+    exit(1);
+  }
 
-`  `if (args.length != 1) {
+  // Ejemplo de switch
+  var diaSemana = args[0];
 
-`    `print("Error, cal indicar un argument");
-
-`    `exit(1);
-
-`  `}
-
-`  `// Exemple de switch
-
-`  `var diaSetmana = args[0];
-
-`  `// Fem ús del mètode toLowerCase dels
-
-`  `// strings per passar-lo tot a minúscula.
-
-`  `switch (diaSetmana.toLowerCase()) {
-
-`    `case "dissabte":
-
-`    `case "diumenge":
-
-`      `print("No és laborable");
-
-`      `break;
-
-`    `default:
-
-`      `print('És laborable o no és un dia correcte');
-
-`  `}
-
+  // Utilizamos el método toLowerCase de los
+  // strings para pasarlo todo a minúscula.
+  switch (diaSemana.toLowerCase()) {
+    case "sabado":
+    case "domingo":
+      print("No es laborable");
+      break;
+    default:
+      print('És laborable o no es un dia correcto');
+  }
 }
-
-Observad que la forma de operar es la misma que con otros lenguajes como Java, de manera que cuando el valor sobre el que estamos haciendo el switch coincide con uno de los **case**, se ejecuta su contenido hasta encontrar un **break**. De esta manera, comprobamos si el día es *sábado* o *domingo*, y ejecutamos el mismo bloque en ambos casos.
+```
+Observad que la forma de operar es la misma que con otros lenguajes como Java, de manera que cuando el valor sobre el que estamos haciendo el switch coincide con uno de los `case`, se ejecuta su contenido hasta encontrar un `break`. De esta manera, comprobamos si el día es *sábado* o *domingo*, y ejecutamos el mismo bloque en ambos casos.
 
 
 ## Estructuras repetitivas
-- **Ejemplo 1: Uso de for**
+**Ejemplo 1: Uso de for**
 
-void main(List<String> args) {  
-
-`  `// Exemple amb for
-
-`  `for (int i = 0; i <= 10; i++) {
-
-`    `//Comprovem si és parell
-
-`    `if (i.isEven)
-
-`      `print("${i} és parell");
-
-`    `else
-
-`      `print("${i} és imparell");
-
-`  `}
-
+```dart
+void main(List<String> args) {  
+  // Ejemplo for
+  for (int i = 0; i <= 10; i++) {
+    //Comprobamos si es par
+    if (i.isEven)
+      print("${i} és parell");
+    else
+      print("${i} és imparell");
+  }
 }
+```
 
-- **Ejemplo2. Bucle while:**
+**Ejemplo2. Bucle while:**
 
-// Exemple de While
-
+```dart
+// Ejemplo de While
 void main(List<String> args) {
 
-`  `// Requereix de la inicialització
-
-`  `// abans del bucle
-
-`  `int i = 0;
-
-`  `while (i <= 10) {
-
-`    `if (i.isEven)
-
-`      `print("${i} és parell");
-
-`    `else
-
-`      `print("${i} és imparell");
-
-`    `i++;
-
-`  `}
-
+  // Requiere la inicialización
+  // antesdel bucle
+  int i = 0;
+  while (i <= 10) {
+    if (i.isEven)
+      print("${i} és par");
+    else
+      print("${i} és impar");
+    i++;
+  }
 }
+```
 
-- Ejemplo 3  Bucle do..while:
+**Ejemplo 3  Bucle do..while:**
 
+```dart
 void main(List<String> args) {
+  // Inicialización previa
+  int i = 0;
 
-`  `// inicialització prèvia
+  do {
+    // El contenido del bucle se ejecutará 
+    // al menos una vez.
 
-`  `int j = 0;
-
-`  `do {
-
-`    `// El contingut del bucle s'executarà
-
-`    `// com a mínim una vegada.
-
-`    `if (j.isEven)
-
-`      `print("${j} és parell");
-
-`    `else
-
-`      `print("${j} és imparell");
-
-`    `j++;
-
-`  `} while (j <= 10);
-
+    if (i.isEven)
+      print("${i} és par");
+    else
+      print("${i} és impar");
+    i++;
+  } while (i <= 10);
 }
+```
 
-1. # <a name="_toc182320554"></a><a name="_toc182320689"></a>Funciones
+# <a name="_apartado4"></a>4. Funciones
 
 ## Declaración de funciones
 
 Dart admite funciones de primer orden, es decir, funciones que no estén vinculadas a un objeto como método.
 
-La declaración de funciones se hace de forma muy parecida a otros lenguajes como C o Kotlin:
+La declaración de funciones se hace de forma muy parecida a otros lenguajes como **C#** o **Kotlin**:
 
-- Función sin argumentos y sin valor de retorno
+**Función sin argumentos y sin valor de retorno**
 
-void funcio(){
-
-`  `// Cos de la funció
-
+```dart
+void funcion(){
+  // Cuerpo de la función
 }
+```
 
-- Función con argumentos y sin valor de retorno
+**Función con argumentos y sin valor de retorno**
 
-void funcio(tipus1 argument1, ..., tipusN argumentN){
-
-`  `// Cos de la funció
-
+```dart
+void funcion(tipus1 argument1, ..., tipusN argumentN){
+  // Cuerpo de la función
 }
+```
 
-- Función con argumentos y con valor de retorno
+**Función con argumentos y con valor de retorno**
 
-tipusRetorn funcio(tipus1 argument1, ..., tipusN argumentN){
-
-`  `// Cos de la funció
-
-`  `return ValorDeTipusRetorn;
-
+```dart
+tipoRetorno funcio(tipo1 argument1, ..., tipoN argumentN){
+  // Cuerpo de la funció
+  return ValorDeTipoRetorno;
 }
+```
 
 
 ## Funciones anónimas y funciones flecha
 
-Dart admite funciones sin nombre o funciones anónimas, que no pueden ser invocadas directamente, pero que pueden utilizarse como *callbacks*, es decir, como argumentos para otras funciones. 
+Dart admite funciones sin nombre o funciones anónimas, que no pueden ser invocadas directamente, pero que pueden utilizarse como `callbacks`, es decir, como argumentos para otras funciones. 
 
-Por ejemplo, definimos una función (*funcio*) que recibe tres argumentos: los dos primeros (*arg1* y *arg2*) son valores, y el tercero es una función anónima (*callback*). Esta función *funcio*, lo que hace a su cuerpo es invocar la función que se nos proporciona como argumento, y devuelve el valor que ésta nos proporciona:
+Por ejemplo, definimos una función `funcion` que recibe tres argumentos: los dos primeros (`arg1` y `arg2`) son valores, y el tercero es una función anónima (`callback`). Esta función `funcion`, lo que hace a su cuerpo es invocar la función que se nos proporciona como argumento, y devuelve el valor que ésta nos proporciona:
 
-// Funció que rep dos arguments i una
-
-// funció anònim que fa de callback
-
-int funcio(arg1, arg2, callback){
-
-`  `int valor=callback(arg1, arg2);
-
-`  `return valor;
-
+```dart
+// Función que recibe dos argumentos y una
+// función anónima que hace de callback
+int funcion(arg1, arg2, callback){
+  int valor=callback(arg1, arg2);
+  return valor;
 }
+```
 
 En este código, estamos invocando una función que recibimos como parámetro dentro del cuerpo de otra función. Aunque la función que recibimos es una función anónima, como la hemos recibido como argumento, haciendo uso del nombre del argumento (*callback*) para invocarla.
 
 Ahora, podemos utilizar esta función proporcionándole en el momento de la invocación la funcionalidad que queremos que realice, a través de una función anónima:
 
+```dart
 void main(){
-
-`  `int valor=funcio(3, 4, (arg1, arg2){
-
-`    `// Estem dins de la funció anònima
-
-`    `return (arg1+arg2);
-
-`  `});
-
-`  `print(valor);
-
+  int valor=funcion(3, 4, (arg1, arg2){
+    // Estem dins de la funció anònima
+    return (arg1+arg2);
+  });
+  print(valor);
 }
 
+```
 Como vemos la función anónima recibe dos argumentos y devuelve el valor de su suma.
 
 ### **Funciones flecha**
-Por su parte, las funciones flecha o *arrow functions* nos permiten abreviar la declaración de una función anónima cuando ésta consta sólo de una línea, de manera que no utilizan ni las claves ni la palabra reservada. 
+Por su parte, las funciones flecha o **arrow functions** nos permiten abreviar la declaración de una función anónima cuando ésta consta sólo de una línea, de manera que no utilizan ni las claves ni la palabra reservada. 
 
 El ejemplo anterior, podría haberse expresado con funciones flecha de la siguiente manera:
 
-int funcio(arg1, arg2, callback) => callback(arg1, arg2);
+```dart
+int funcion(arg1, arg2, callback) => callback(arg1, arg2);
 
 void main(){
-
-`  `print (funcio(3, 4, (arg1, arg2) => arg1+arg2));
-
+  print (funcion(3, 4, (arg1, arg2) => arg1+arg2));
 }
-
+```
 
 ## Argumentos posicionales obligatorios, opcionales y con nombre
 
 Las funciones en Dart admiten tres tipos de argumentos:
 
 - Argumentos ***posicionales obligatorios***,
-- Argumentos ***posicionales opcionales***, que indicaremos con [], y que pueden tener o no valor predeterminado (si no se especifica será nulo), y 
-- Argumentos ***opcionales con nombre***, que indicaremos con {}, y para los que se requerirá indicar el nombre a la hora de la invocación. Cabe destacar que en este tipo de parámetros, el orden en que se indican en la invocación no importa.
+- Argumentos ***posicionales opcionales***, que indicaremos con `[]`, y que pueden tener o no valor predeterminado (si no se especifica será nulo), y 
+- Argumentos ***opcionales con nombre***, que indicaremos con `{}`, y para los que se requerirá indicar el nombre a la hora de la invocación. Cabe destacar que en este tipo de parámetros, el orden en que se indican en la invocación no importa.
 
 Veamos algunos ejemplos:
 
-void f1(int obligatori, [int opcional = 0]) {
-
-`  `print("${obligatori}, ${opcional}");
-
+```dart
+void f1(int obligatorio, [int opcional = 0]) {
+  print("${obligatorio}, ${opcional}");
 }
 
-void f2(int obligatori, {int opcionalAmbNom = 0}) {
-
-`  `print("${obligatori}, ${opcionalAmbNom}");
-
+void f2(int obligatorio, {int opcionalConNombre = 0}) {
+  print("${obligatorio}, ${opcionalConNombre}");
 }
 
 void main() {
+  f1(1);    // Muestra: 1, 0
+  //f1();   // Si llamamos f1() sin argumentos, obtendremos
+            // el error: Context: Found this candidate,
+            // but the arguments don't match.
 
-`  `f1(1);    // Mostra: 1, 0
+  f1(1, 2); // Muestra:  1, 2
 
-`  `//f1();   // Si llancem f1() sense arguments, obtindrem
+  f2(1);    // Muestra: 1, 0
 
-`            `// l'error: Context: Found this candidate,
+  // f2(1, 2); // Si proporcionamos dos argumentos a f2, pero
+              // sin indicar el nombre, tendremos un error.
 
-`            `// but the arguments don't match.
-
-`  `f1(1, 2); // Mostra:  1, 2
-
-`  `f2(1);    // Mostra: 1, 0
-
-`  `// f2(1, 2); // Si proporcionem dos arguments a f2, però
-
-`              `// sense indicar el nom, rebrem de nou un error.
-
-`  `f2(1, opcionalAmbNom: 3); // Mostra 1, 3
-
+  f2(1, opcionalConNombre: 3); // Muestra 1, 3
 }
+```
 
 Cuando una llamada a función, a un método de un objeto o a un constructor hace uso de varios argumentos con nombre, es habitual separar los diferentes parámetros por líneas. Por ejemplo:
 
+```dart
 funcioX(
-
-`    `paremetre1: valor1,
-
-`    `parametre2: valor2
-
-...
-
+    paremetre1: valor1,
+    parametre2: valor2
+    ...
 )
+```
 
 Como veremos posteriormente, esta será una construcción muy común cuando generemos componentes visuales con Flutter.
 
