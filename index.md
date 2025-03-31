@@ -16,11 +16,11 @@ El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer un
 
 [*6. Programación Orientada a Objetos*](#_apartado6)
 
-[*7. Programación Asíncrona*](#_toc182320692)
+[*7. Programación Asíncrona*](#_apartado7)
 
-[*8. Proyectos en Dart*](#_toc182320693)
+[*8. Proyectos en Dart*](#_apartado8)
 
-[*9. Peticiones HTTP*](#_toc182320694)
+[*9. Peticiones HTTP*](#_apartado9)
 
 
 
