@@ -896,10 +896,6 @@ NombreClase objecto=NombreClase(
 
 Y no importa el orden en que ponemos los argumentos, ya que lo que cuenta ahora es el nombre.
 
-POR HACER!!!!!!!!!!:
-
-Veamos el ejemplo de la clase *Persona* más detallado en el Gist: <https://dartpad.dev/id=438a3989dd9643df3c5eaa97e259ae29>.
-
 
 ### **Múltiples constructores con nombre (named constructor)**
 Dart no soporta sobrecarga de constructores. Para posibilitar la construcción de objetos mediante diferentes métodos se utilizan los constructores con nombre, que también aportan mayor claridad a las declaraciones. Para definir un constructor con nombre hacemos uso del punto para separar al constructor del nombre:
@@ -953,7 +949,7 @@ NombreClase miObjeto=NombreClase.fromJSON(objetoJSON)
 
 **Exemple**
 
-Seguint amb l'exemple sobre la definició de persones, podríem fer ús d'un constructor amb nom de la següent forma:
+Siguiedno el ejemplo de la definición de personas, podríamos hacer uso de un constructor con nombre de la siguiente forma:
 
 ```dart
 class Persona {
@@ -985,6 +981,7 @@ void main() {
 ```
 
 Disponemos del ejemplo completo al siguiente Gist: <https://dartpad.dev/?id=f7ed2afe29db34a283a786dc6eac2898>.
+
 
 
 ### **Listas de inicializadores o de inicialización**
@@ -1193,16 +1190,15 @@ m.fB();
 m.fC();
 ```
 
+# <a name="_apartado7"></a> 7. Programación Asíncrona
 
-<a name="_toc182320557"></a><a name="_toc182320692"></a>
-1. # Programación Asíncrona
-
-En este apartado vamos a abordar uno de los aspectos más complejos y a la vez interesantes del lenguaje Dart: la programación asíncrona. Complejo porque suponen un cambio en la concepción tradicional de la programación concurrente, basada en hilos, e interesante porque juega un papel fundamental en la programación reactiva de Flutter.
+En este apartado vamos a abordar uno de los aspectos más complejos y a la vez interesantes del lenguaje Dart: la programación asíncrona. Complejo porque supone un cambio en la concepción tradicional de la programación concurrente, basada en hilos, e interesante porque juega un papel fundamental en la programación reactiva de Flutter.
 
 ## Programación Asíncrona en Dart
 El asincronismo hace referencia a un modelo de programación donde es posible que determinadas operaciones devuelvan el control de la ejecución al programa que las ha invocado antes de haber terminado. 
 
 Los lenguajes de programación ofrecen diferentes tipos de mecanismos para tratar esta programación, como puedan ser los threads en Java o las corrutinas en Kotlin, entre muchos otros.
+
 ### **Future**
 Dart y Flutter hacen uso de la clase *Future* y *async/await* para trabajar funciones de forma asíncrona.
 
@@ -1210,116 +1206,123 @@ Los *Futures* definen tipos de datos asociados a tareas asíncronas, que no se r
 
 Para ver un ejemplo que simule una función asíncrona, definiremos la siguiente:
 
-Future<String> funcioAsincrona(){
-
-` `return Future.delayed(Duration(seconds: 1), (){
-
-`   `print("Estem en funcioAsincrona");
-
-`   `return 'Valor de retorn';
-
-` `});
-
+```dart
+Future<String> funcionAsincrona(){
+ return Future.delayed(Duration(seconds: 1), (){
+   print("Estamos en función asíncrona");
+   return 'Valor de retorno';
+ });
 }
+```
 
-Esta función devuelve un objeto de tipo *Future* al cabo de un segundo, que contendrá un *String*. O siendo más precisos, nos devuelve un objeto de tipo *Future*, que al cabo de un segundo lanzará una función que nos devuelve un *String*.
+Esta función devuelve un objeto de tipo `Future` al cabo de un segundo, que contendrá un `String`. O siendo más precisos, nos devuelve un objeto de tipo *Future*, que al cabo de un segundo lanzará una función que nos devuelve un *String*.
 
 Para simular la pausa, hemos utilizado el método **delayed** de la clase **Future**. Este método recibe un objeto de tipo Duration como primer argumento, y una función de callback, sin argumentos como segundo. Observe que dentro de esta función de callback se realiza también un returno.
 
-La clase [Duration](https://api.dart.dev/stable/2.18.5/dart-core/Duration-class.html) representa una duración, o lo que es lo mismo, la diferencia entre dos instantes de tiempo. Con el fin de crear un objeto de tipo **Duration**, hacemos uso de su constructor, al que le podemos proporcionar diferentes argumentos por nombre (hours, minutes, seconds..). En el ejemplo, se ha puesto una duración de un segundo, haciendo uso del argumento **seconds**.
+La clase [Duration](https://api.dart.dev/stable/2.18.5/dart-core/Duration-class.html) representa una duración, o lo que es lo mismo, la diferencia entre dos instantes de tiempo. Con el fin de crear un objeto de tipo `Duration`, hacemos uso de su constructor, al que le podemos proporcionar diferentes argumentos por nombre (hours, minutes, seconds..). En el ejemplo, se ha puesto una duración de un segundo, haciendo uso del argumento `seconds`.
 
 Vamos a ver el funcionamiento mediante el siguiente programa:
 
+```dart
 void main(){
-
-`  `print("Inici");
-
-`  `var a=funcioAsincrona(); 
-
-`  `print(a);
-
-`  `print("Final");
-
+  print("Inicio");
+  var a=funcionAsincrona(); 
+  print(a);
+  print("Final");
 }
+```
 
 El resultado que se nos mostrará por pantalla será:
 
+```
 Inici
-
-Instance of '\_Future<String>'
-
+Instance of '_Future<String>'
 Final
-
 Estem en funcioAsincrona
+```
 
-Como era de esperar, lo primero que muestra es el texto *Inicio*, correspondiente al primer **print** del programa. Después, se invoca a la función asíncrona y se muestra el resultado que ésta devuelve: **Instance of '\_Future<String>**'. Es decir, un objeto de tipo Future, que contendrá *en un futuro* un ***String***.
+Como era de esperar, lo primero que muestra es el texto *Inicio*, correspondiente al primer `print` del programa. Después, se invoca a la función asíncrona y se muestra el resultado que ésta devuelve: `Instance of Future<String>`. Es decir, un objeto de tipo Future, que contendrá *en un futuro* un `String`.
 
 Para obtener realmente el valor, debemos esperar a que éste se *resuelva*, haciendo uso del método **then** de la clase Future:
 
-Future<String> a=funcioAsincrona(); 
+```dart
+  Future<String> a = funcionAsincrona();
 
-a.then( ( String data ) {
+  a.then((String data) {
+    print(data);
+  });
+```
 
-`  `print(data);
-
-} );
-
-Este método **then** se invocará cuando la función asíncrona devuelva el valor, y recibirá, ahora sí, un dato de tipo **String** con el resultado de función. Se suele decir que la variable a se *resuelve* en este momento.
+Este método `then` se invocará cuando la función asíncrona devuelva el valor, y recibirá, ahora sí, un dato de tipo `String` con el resultado de función. Se suele decir que la variable a se *resuelve* en este momento.
 
 Si lo añadimos al ejemplo: 
 
-<a name="__codelineno-5-1"></a>Veremos que la salida es:
+```dart
+void main(){
+  print("Inici");
 
+  Future<String> a=funcionAsincrona(); 
+
+  print(a);
+
+  a.then( ( String data ) {
+    print(data);
+  } );
+
+  print("Final");
+}
+```
+
+Veremos que la salida es:
+
+```
 Inici
-
-Instance of '\_Future<String>'
-
+Instance of '_Future<String>'
 Final
-
 Estem en funcioAsincrona
-
 Valor de retorn
+```
 
 Como vemos, la ejecución del programa ha seguido su camino, y la función se ha ejecutado y resuelto de forma asíncrona, pero ahora ya tenemos acceso al resultado.
 
 
-
 ### **Async/Await**
-Cuando se desea que una función asíncrona tenga un comportamiento síncrono, podemos hacer uso de la palabra clave **await**. De esta manera, cuando se invoca una función asíncrona, le estamos indicando a Dart que se espere a la finalización de la misma, en lugar de seguir su ejecución.
+
+Cuando se desea que una función asíncrona tenga un comportamiento síncrono, podemos hacer uso de la palabra clave `await`. De esta manera, cuando se invoca una función asíncrona, le estamos indicando a Dart que se espere a la finalización de la misma, en lugar de seguir su ejecución.
 
 Esto se indicaría de la siguiente forma:
 
-String a = await funcioAsincrona();
-
+```dart
+String a = await funcionAsincrona();
 print(a);
+```
 
 De esta manera, en la misma llamada, esperaríamos la finalización de la función asíncrona (la haríamos síncrona), y el cambio más importante, **ya recibiríamos directamente el String que devuelve la función, en lugar del Future que recibimos antes**.
 
-Además, cuando utilizamos un **await** dentro de una función (incluso la función **main**), ésta debe declararse como **async**, de la siguiente manera:
+Además, cuando utilizamos un `await` dentro de una función (incluso la función `main`), ésta debe declararse como `async`, de la siguiente manera:
 
+```dart
 void main() async {
+  print("Inici");
 
-`  `print("Inici");
+  String a=await funcioAsincrona(); 
+  print(a);
 
-`  `String a=await funcioAsincrona(); 
-
-`  `print(a);
-
-`  `print("Final");
-
+  print("Final");
 }
+```
 
 Con esto el resultado ya será el esperado en un comportamiento síncrono:
 
+```
 Inici
-
 Estem en funcioAsincrona
-
 Valor de retorn
-
 Final
+```
 
 ### **Tras el asincronismo en Dart: El evento Loop o Bucle de eventos**
+
 Cuando iniciamos una aplicación en Dart (y por extensión en Flutter), se crea un proceso nuevo, o un *Isolate* en terminología más propia de Dart. Este hilo será único, de manera que las operaciones se realizan una tras otra. Además, mientras se está efectuando una operación, ésta no será interrumpida por ningún otro proceso.
 
 En este contexto, cabe preguntarnos cómo gestiona Dart la concurrencia, teniendo en cuenta, además, que cuando trabajamos con Flutter nos encontraremos en un entorno completamente dirigido por eventos.
@@ -1328,13 +1331,13 @@ La respuesta se encuentra en el bucle de eventos o *Event Loop*, el secuenciador
 
 Cuando creamos un proceso o *Isolate* de Dart se realizan las siguientes operaciones:
 
-1. Se inicializan dos cúes FIFO: *MicroTask* y *Event*, que almacenarán tareas a llevar a cabo con diferentes prioridades.
+1. Se inicializan dos colas FIFO: *MicroTask* y *Event*, que almacenarán tareas a llevar a cabo con diferentes prioridades.
 1. Se ejecuta el método main()
 1. Una vez finalizado el main, se lanza el Event Loop, que irá ejecutando de forma ordenada las tareas de las colas.
 
 El funcionamiento de este Event Loop es el que podemos ver en el siguiente diagrama de flujo:
 
-![](Aspose.Words.5a52b982-95eb-4a5e-86e9-0cfc7291d183.002.png)
+![Flujo](./images/imagen2.png)
 
 Básicamente, el proceso de Dart no finaliza mientras quedan tareas pendientes en alguna de las colas.
 
@@ -1342,44 +1345,37 @@ La principal diferencia entre ambas colas es la prioridad, ya que la cola de mic
 
 Generalmente, trabajaremos con eventos, como pueda ser la lectura de un fichero, la recepción de la respuesta a una petición de red, o la lectura de la base de datos.
 
-Veamos el siguiente ejemplo, donde, se generarán dos tareas, una que será un evento de temporizador (**Future.delayed**), que se dispara a los 0 ms, y la otra una microtarea programada mediante la función **scheduleMicrotask** de la librería **async**:
+Veamos el siguiente ejemplo, donde, se generarán dos tareas, una que será un evento de temporizador (`Future.delayed`), que se dispara a los 0 ms, y la otra una microtarea programada mediante la función `scheduleMicrotask` de la librería `async`:
 
+```dart
 import 'dart:async';
 
 void main() {
+  print("Inicio");
+  Future.delayed(
+      Duration(milliseconds: 0), 
+      () => print("Hola desde la cola de eventos")
+  );
 
-`  `print("Inici");
+  scheduleMicrotask(
+      () => print("Hola desde la cola de microtareas")
+  );
 
-`  `Future.delayed(
-
-`      `Duration(milliseconds: 0), 
-
-`      `() => print("Hola des de de la cua d'events")
-
-`  `);
-
-`  `scheduleMicrotask(
-
-`      `() => print("Hola des de la cua de micotasques")
-
-`  `);
-
-`  `print("Final");
+  print("Final");
 
 }
-
+```
 
 El resultado de la ejecución de este programa es:
 
+```
 Inici
-
 Final
-
 Hola des de la cua de micotasques
-
 Hola des de de la cua d'events
+```
 
-Dispone de información adicional sobre el Evento Loop en los siguientes artículos:
+Disponemos de información adicional sobre el Evento Loop en los siguientes artículos:
 
 - [Modos de ejecución de código en Flutter](https://medium.com/comunidad-flutter/modos-de-ejecuci%C3%B3n-de-c%C3%B3digo-en-flutter-f7941030e3a1)
 - [El bucle de eventos y el dardo](https://dart.cn/articles/archive/event-loop)
@@ -1396,73 +1392,77 @@ Atención
 De momento vamos a dejar apartados los Streams, para no cargar un tema que ya es potente con lo visto hasta aquí.
 
 Los retomaremos en el futuro si es necesario.
-1. # <a name="_toc182320558"></a><a name="_toc182320693"></a>Proyectos en Dart 
+
+
+# <a name="_apartado8"></a>8. Proyectos en Dart 
 
 ## Proyectos con Dart
 Hasta ahora hemos desarrollado programas con Dart que consistían con un único fichero, y que ejecutábamos con el orden la herramienta de la línea de órdenes dart.
 
-Cuando nuestro programa crece y debemos dividir su funcionalidad en diversos ficheros, nos surge la necesidad de generar un proyecto *Dart* completo, de manera que nos permita también indicar dependencias de terceros y más opciones de configuración. Para ello, utilizaremos la suborden **create** del orden **dart**.
+Cuando nuestro programa crece y debemos dividir su funcionalidad en diversos ficheros, nos surge la necesidad de generar un proyecto *Dart* completo, de manera que nos permita también indicar dependencias de terceros y más opciones de configuración. Para ello, utilizaremos la suborden `create` del orden `dart`.
 
-Si ejecutamos directamente **dart create** podremos ver las diferentes opciones que nos ofrece. En nuestro caso, y a modo de ejemplo que continuaremos en el siguiente apartado, crearemos un proyecto sencillo de consola que llamaremos info\_provincies (recuerde que, en Dart, los proyectos no pueden tener mayúsculas). Para ello, dentro de la carpeta donde queramos almacenar nuestros proyectos, escribiremos la orden:
+Si ejecutamos directamente `dart create` podremos ver las diferentes opciones que nos ofrece. En nuestro caso, y a modo de ejemplo que continuaremos en el siguiente apartado, crearemos un proyecto sencillo de consola que llamaremos `info_provincies` (recuerde que, en Dart, los proyectos no pueden tener mayúsculas). Para ello, dentro de la carpeta donde queramos almacenar nuestros proyectos, escribiremos la orden:
 
-$ dart create -t console-simple projecte\_exemple
+```
+dart create -t console-simple projecte\exemple
+```
 
-Esto nos generará una estructura de proyecto Dart habitual en la carpeta *projecte\_exemple*, donde lo que más nos interesa es el fichero con las propiedades del proyecto (*pubspec.yaml*) y el directorio con el código fuente (*bin* en el caso de Dart).
+Esto nos generará una estructura de proyecto Dart habitual en la carpeta `projecte_exemple`, donde lo que más nos interesa es el fichero con las propiedades del proyecto (*pubspec.yaml*) y el directorio con el código fuente (*bin* en el caso de Dart).
 
 Si consultamos la carpeta generada veremos que contiene el siguiente contenido:
 
-projecte\_exemple
-
-├── analysis\_options.yaml
-
+```
+projecte_exemple
+├── analysis_options.yaml
 ├── bin
-
-│   └── projecte\_exemple.dart
-
+│   └── projecte_exemple.dart
 ├── CHANGELOG.md
-
 ├── pubspec.lock
-
 ├── pubspec.yaml
-
 └── README.md
+```
 
-Donde además del pubspec y la carpeta bin encontramos un fichero para el control de cambios (changelog) un fichero readme o un .gitignore, entre otros.
+Donde además del `pubspec` y la carpeta `bin` encontramos un fichero para el control de cambios (`changelog`) un fichero readme o un .`gitignore`, entre otros.
 
 Cuando trabajamos con Flutter, veremos que la estructura del proyecto es muy parecida, ya que un proyecto Flutter también es un proyecto Dart. La principal diferencia que encontraremos será que el código fuente estará ubicado en la carpeta lib en lugar de bin.
 
 ### **Paquetes y librerías: El gestor pub**
 Dart hace uso de *paquetes* con el fin de gestionar software compartido, como puedan ser las bibliotecas u otros paquetes de utilidades.
 
-El gestor de paquetes que utiliza Dart es **pub**, y nos permite cargar paquetes desde el sistema de ficheros locales o repositorios *Git*. No obstante, generalmente haremos uso del repositorio de paquetes público *pub.dev*. El gestor *pub* se encargará también de gestionar y descargar las dependencias entre paquetes, teniendo en cuenta la versión del SDK.
+El gestor de paquetes que utiliza Dart es `pub`, y nos permite cargar paquetes desde el sistema de ficheros locales o repositorios *Git*. No obstante, generalmente haremos uso del repositorio de paquetes público *pub.dev*. El gestor *pub* se encargará también de gestionar y descargar las dependencias entre paquetes, teniendo en cuenta la versión del SDK.
 
 La mayoría de los IDE que permiten trabajar con Dart ofrecen soporte para utilizar *pub*, y permiten crear, descargar, actualizar o publicar paquetes. VSCode nos permite interactuar con el sistema *pub* a través de la extensión de *Dart*, así como añadir nuevas dependencias mediante la extensión *Pubspec Assist*.
 
 Con el fin de añadir dependencias a un proyecto, podemos directamente editar este fichero *pubspec.yaml*, o bien utilizar el orden dart pub add.
 
-Por ejemplo, añadiremos al proyecto *projecte\_exemple* la dependencia de la [librería http](https://pub.dev/packages/http), que utilizaremos en el siguiente apartado, y que se encarga de realizar y gestionar peticiones HTTP en la web. Para ello, tenemos varias opciones:
+Por ejemplo, añadiremos al proyecto `projecte_exemple` la dependencia de la [librería http](https://pub.dev/packages/http), que utilizaremos en el siguiente apartado, y que se encarga de realizar y gestionar peticiones HTTP en la web. Para ello, tenemos varias opciones:
 
 - **Opción 1. Añadir la librería desde la línea de órdenes**
 
 Desde dentro del directorio del proyecto haríamos:
 
+```
 dart pub add http
+```
 
-Con lo que se nos afianza la línea siguiente al fichero **pubspec.yaml**, dentro de la sección **dependencies**:
+Con lo que se nos afianza la línea siguiente al fichero `pubspec.yaml`, dentro de la sección `dependencies`:
 
-`  `http: ^1.2.2
+```dart
+http: ^1.2.2
+```
 
-- **Opción 2. Modificar el fichero *pubspec.yaml* directamente**
+- **Opción 2. Modificar el fichero `pubspec.yaml` directamente**
 
+```dart
 dependencies:
-
-`  `http: ^1.2.2
+  http: ^1.2.2
+```
 
 - **Opción 3. Añadir la dependencia haciendo uso de la extensión Pubspec Assist**
 
-Desde VSCode, podemos añadir la dependencia haciendo uso de la extensión Pubspec Assit. Para ello, activamos la paleta de órdenes de VSCode (con Ctrl + Shift + P en GNU/Linux y Windows o Command+Shift+P en Mac), y buscando el orden *Pubspec Assit: Add/update dependencies*.
+Desde VSCode, podemos añadir la dependencia haciendo uso de la extensión Pubspec Assit. Para ello, activamos la paleta de órdenes de VSCode (con `Ctrl + Shift + P` en GNU/Linux y Windows o `Command+Shift+P` en Mac), y buscando el orden *Pubspec Assit: Add/update dependencies*.
 
-Si nos encontramos en un directorio donde tengamos el fichero *pubspec.yaml*, nos pedirá qué extensión queremos instalar. Indicamos http y automáticamente se nos añadirá la dependencia al fichero.
+Si nos encontramos en un directorio donde tengamos el fichero *pubspec.yaml*, nos pedirá qué extensión queremos instalar. Indicamos `http` y automáticamente se nos añadirá la dependencia al fichero.
 
 **Descarga de librerías**
 
@@ -1470,39 +1470,43 @@ Cuando añadimos una dependencia desde la línea de órdenes (con dart pub get),
 
 En caso de que hayamos modificado el fichero con otro editor, o bien que hemos obtenido un proyecto que no tiene todavía las dependencias descargadas, podemos descargarlas e instalarlas manualmente con el orden dart pub get (en Flutter, posteriormente, utilizaremos flutter pub get):
 
+```
 $ dart pub get
-
 Resolving dependencies... 
-
 Got dependencies!
+```
 
 Tal y como se indica en la [documentación oficial de Dart](https://dart.dev/tools/pub/cmd/pub-get#the-system-package-cache), y a diferencia de otras plataformas como nodejs o Java, las dependencias no se guardan en el mismo proyecto, sino en una *caché* de paquetes del sistema.
 
 La idea es que, como hay varios paquetes que pueden utilizar la misma versión de una dependencia, ésta sólo se descargue una vez, y quede almacenada en esta memoria del sistema.
 
-Si examinamos algún proyecto de Dart, veremos que hay un directorio oculto llamado .dart\_tool que contiene un fichero package\_config.json. Este fichero contiene información sobre las librerías que necesita el proyecto, las versiones, y en qué ubicación de esta *caché* se encuentran. La ubicación más habitual de la misma está en el directorio ~/.pub-cache/hosted/pub.dartlang.org/ de nuestra carpeta personal.
+Si examinamos algún proyecto de Dart, veremos que hay un directorio oculto llamado `.dart\tool` que contiene un fichero `package\config.json`. Este fichero contiene información sobre las librerías que necesita el proyecto, las versiones, y en qué ubicación de esta *caché* se encuentran. La ubicación más habitual de la misma está en el directorio `~/.pub-cache/hosted/pub.dartlang.org/` de nuestra carpeta personal.
 
 
-1. # <a name="_toc182320559"></a><a name="_toc182320694"></a>Peticiones HTTP
+# <a name="_apartado8"></a>8. Peticiones HTTP
 
 En aquest apartat realitzarem amb Dart algunes consultes a la Web, fent ús de la llibreria HTTP que hem instal·lat anteriorment.
 
 ## La llibrería [HTTP](https://pub.dev/packages/http)
 En el apartado anterior ya hemos visto cómo incorporar la librería HTTP a nuestro proyecto, la cual nos permitirá llevar a cabo peticiones HTTP a cualquier recurso de red, haciendo uso de *Futures*.
 
-La librería HTTP, internamente define un conjunto de clases y funciones de alto nivel para el consumo de recursos HTTP, como puedan ser las funciones **get()**, **post()**, **update()**, **put()** o **delete()**, entre muchas otras.
+La librería HTTP, internamente define un conjunto de clases y funciones de alto nivel para el consumo de recursos HTTP, como puedan ser las funciones `get()`, `post()`, `update()`, `put()` o `delete()`, entre muchas otras.
 
 La forma más sencilla de utilizar la biblioteca es importándola a nuestro código con:
 
+```dart
 import 'package:http/http.dart';
+```
 
 y hacer uso directamente de estas funciones de nivel superior (no asociadas a ningún objeto).
 
 Otra opción bastante frecuente es definir un espacio de nombres como un *alias* bajo el cual referenciar toda la librería. Para ello, la importaremos de la siguiente forma:
 
+```dart
 import 'package:http/http.dart' as http;
+```
 
-De manera que accedim a les funcionalitats que s'ofereixen com si es tractara de mètodes de l'espai de noms *http*: **http.get()**, **http.post()**, etc.
+De manera que accedim a les funcionalitats que s'ofereixen com si es tractara de mètodes de l'espai de noms *http*: `http.get()`, `http.post()`, etc.
 
 ## Ejemplo de uso
 Vamos a hacer de los siguientes recursos en la web que nos ofrecen información sobre las diferentes comarcas de nuestro territorio:
@@ -1513,53 +1517,39 @@ Vamos a hacer de los siguientes recursos en la web que nos ofrecen información 
 
 A continuación, veremos, a modo de ejemplo, cómo obtendríamos un listado de las comarcas de una provincia concreta.
 
-Para ello, en nuestro proyecto podemos editar el fichero bin/projecte\_exemple.dart y añadimos el siguiente código:
+Para ello, en nuestro proyecto podemos editar el fichero `bin/projecte_exemple.dart` y añadimos el siguiente código:
 
-// Importem les lliberies necessàries
-
-import 'dart:convert'; // Per realitzar conversions entre tipus de dades
-
-import 'package:http/http.dart' as http; // Per realitzar peticions HTTP
+```dart
+// Importamos las librerías necesarias
+import 'dart:convert'; // Para realizar conversiones entre tipos de datos
+import 'package:http/http.dart' as http; // Para realizar peticiones HTTP
 
 void main(List<String> args) {
+  // Definimos el endpoint o dirección del recurso:
+  String url = 'https://node-comarques-rest-server-production.up.railway.app/api/comarques/València';
 
-`  `// Definim l'endpoint o adreça del recurs:
+  // Lanzamos una petición GET mediante el método http.get:
+  var response = http.get(Uri.parse(url));
 
-`  `String url = 'https://node-comarques-rest-server-production.up.railway.app/api/comarques/València';
+  // Esta nos devuelve un Future, que habrá que procesar
+  //con el método then:
+  response.then((data) {
+    // El Future se resuelve con una instancia del objeto response
+    // que tiene una propiedad statusCode con el código de estado
+    // y una propiedad body con el cuerpo de la respuesta.
 
-`  `// I llancem una petició GET mitjançant el mètode http.get:
+    if (data.statusCode == 200) {
+      String body = utf8.decode(data.bodyBytes);
+      final bodyJSON = jsonDecode(body) as List;
 
-`  `var response = http.get(Uri.parse(url));
-
-`  `// Aquesta ens retorna un Future, que caldrà processar
-
-`  `// amb el mètode then:
-
-`  `response.then((data) {
-
-`    `// El Future es resol a una instància de l'objecte Response
-
-`    `// que conté una propietat statusCode amb el codi d'estat
-
-`    `// i una propietat body amb el cos de la resposta.
-
-`    `if (data.statusCode == 200) {
-
-`      `String body = utf8.decode(data.bodyBytes);
-
-`      `final bodyJSON = jsonDecode(body) as List;
-
-`      `// \_I el mostrem
-
-`      `print(bodyJSON.toString());
-
-`    `} // if
-
-`  `});
-
+      // Lo mostramos
+      print(bodyJSON.toString());
+    } 
+  });
 }
+```
 
-Si ahora ejecutamos el proyecto con **dart run**, obtendremos la lista de comarcas de la provincia de Valencia.
+Si ahora ejecutamos el proyecto con `dart run`, obtendremos la lista de comarcas de la provincia de Valencia.
 
 Aunque el código está bastante comentado, vamos a hacer algunas puntualizaciones:
 
@@ -1567,50 +1557,46 @@ Aunque el código está bastante comentado, vamos a hacer algunas puntualizacion
 - Cuando hacemos la petición GET (**http.get()**), se nos devuelve un *Future*, que procesamos con then. El objeto de tipo Response al que se resuelve este *Future* contiene el código de estado de la petición HTTP (**statusCode**). Cuando este código es *200 (OK)*, indica que la petición se ha atendido correctamente, y que, por tanto, en la propiedad **body** disponemos de la respuesta. Este código puede indicar también errores en la petición (4xx, como el 404 Not Found), o errores internos del servidor (5xx).
 - Para descodificar el JSON que nos devuelve como respuesta, lo hemos hecho en dos pasos. En primer lugar, descodificamos la respuesta en formato UTF8, para descodificar caracteres. Especiales:
 
+```dart
 String body = utf8.decode(data.bodyBytes);
+```
 
 Y luego descodificamos este String que se nos devuelve como un JSON, al que le hacemos un casting para convertirlo en lista:
 
+```dart
 final bodyJSON = jsonDecode(body) as List;
+```
 
-\* En caso de obtener este último bodyJSON sin pasar previamente por la descodificación en UTF8, (**bodyJSON = jsonDecode(data.body) as List**);, nos aparecerían caracteres extraños en lugar de los acentos.
+\* En caso de obtener este último bodyJSON sin pasar previamente por la descodificación en UTF8, (`bodyJSON = jsonDecode(data.body) as List`);, nos aparecerían caracteres extraños en lugar de los acentos.
 
 ## Ejemplo con async/Await
-En el ejemplo anterior la respuesta HTTP se nos devuelve en un *Future* de manera asíncrona. Si lo que queremos es esperarnos a obtener la respuesta directamente, sin hacer uso del mismo, podríamos lanzar la petición incorporando un **await**:
 
-`  `var response = await http.get(Uri.parse(url));
+En el ejemplo anterior la respuesta HTTP se nos devuelve en un *Future* de manera asíncrona. Si lo que queremos es esperarnos a obtener la respuesta directamente, sin hacer uso del mismo, podríamos lanzar la petición incorporando un `await`:
 
+```dart
+var response = await http.get(Uri.parse(url));
+```
 
-Lo que nos obligaría, por otra parte, a definir la función **main** como **async**.
+Lo que nos obligaría, por otra parte, a definir la función `main` como `async`.
 
 De esta manera, ya podríamos tratar la respuesta directamente. El código completo quedaría:
 
+```dart
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 void main(List<String> args) async {
+  String url = 'https://node-comarques-rest-server-production.up.railway.app/api/comarques/València';
 
-`  `String url = 'https://node-comarques-rest-server-production.up.railway.app/api/comarques/València';
+  // Lanzamos la petición GET
+  // Ahora response será de tipo Response, no un Future
+  var response = await http.get(Uri.parse(url));
 
-`  `// Llancem la petició GET
+  if (response.statusCode == 200) {
+    String body = utf8.decode(response.bodyBytes);
+    final bodyJSON = jsonDecode(body) as List;
 
-`  `// Are response ja serà de tipus Response, no un Future
-
-`  `var response = await http.get(Uri.parse(url));
-
-`  `if (response.statusCode == 200) {
-
-`    `String body = utf8.decode(response.bodyBytes);
-
-`    `final bodyJSON = jsonDecode(body) as List;
-
-`    `print(bodyJSON.toString());
-
-`  `}
-
+    print(bodyJSON.toString());
+  }
 }
-
-1 *de 41*
-
-
+```
