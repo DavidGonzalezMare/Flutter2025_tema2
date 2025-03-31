@@ -1483,7 +1483,7 @@ La idea es que, como hay varios paquetes que pueden utilizar la misma versión d
 Si examinamos algún proyecto de Dart, veremos que hay un directorio oculto llamado `.dart\tool` que contiene un fichero `package\config.json`. Este fichero contiene información sobre las librerías que necesita el proyecto, las versiones, y en qué ubicación de esta *caché* se encuentran. La ubicación más habitual de la misma está en el directorio `~/.pub-cache/hosted/pub.dartlang.org/` de nuestra carpeta personal.
 
 
-# <a name="_apartado8"></a>8. Peticiones HTTP
+# <a name="_apartado9"></a>9. Peticiones HTTP
 
 En aquest apartat realitzarem amb Dart algunes consultes a la Web, fent ús de la llibreria HTTP que hem instal·lat anteriorment.
 
