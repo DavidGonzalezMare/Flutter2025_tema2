@@ -14,7 +14,7 @@ El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer un
 
 [*5. Colecciones*](#_apartado5)
 
-[*6. Programación Orientada a Objetos*](#_toc182320691)
+[*6. Programación Orientada a Objetos*](#_apartado6)
 
 [*7. Programación Asíncrona*](#_toc182320692)
 
@@ -732,7 +732,7 @@ El artículo [*Top 10 métodos para manipular colecciones en Dart*](https://www.
 El codelab de Dart sobre iterables: <https://dart.dev/codelabs/iterables>
 
 
-1. # <a name="_toc182320556"></a><a name="_toc182320691"></a>Programación Orientada a Objetos
+  # <a name="_apartado6"></a>6. Programación Orientada a Objetos
 
 La orientación a objetos es de gran importancia en Dart, y sobre todo en Flutter, ya que en estos conceptos se basará todo el diseño de interfaces mediante *widgets*.
 
@@ -740,27 +740,21 @@ La orientación a objetos es de gran importancia en Dart, y sobre todo en Flutte
 
 La sintaxis básica para crear una clase en Dart es bastante parecida a otros lenguajes, como Java:
 
-class NomClasse {
+```dart
+class NombreClase {
+    Tipo1? propiedad1;
+    Tipo2? propiedad2; 
+    ...
 
-`    `Tipus1? propietat1;
-
-`    `Tipus2? propietat2; 
-
-...
-
-`    `// Constructor (opcional)
-
-`    `NomClasse(Tipus1 arg1, Tipus2 arg2,...){
-
-`        `propietat1=arg1; // Podem utilitzar this.propietat1, però no es recomana
-
-`        `propietat2=arg2; // D'igual manaera amb this.propietat2
-
-...
-
-`    `}
-
+    // Constructor (opcional)
+    NomClasse(Tipo1 arg1, Tipo2 arg2,...){
+        propiedad1=arg1; // Podem utilitzar this.propietat1, però no es recomana
+        propiedad2=arg2; // D'igual manaera amb this.propietat2
+        ...
+    }
 }
+
+```
 
 Veamos algunos detalles. Por un lado, el constructor de la clase es opcional. En caso de que éste no se declare, Dart utiliza un constructor predeterminado sin argumentos. 
 
@@ -768,147 +762,141 @@ Si incorporamos un constructor a la clase, este se trata de un método con el mi
 
 Fijémonos que en el ejemplo hemos definido las propiedades como *nullables*. En caso de no hacerlo así, el compilador nos daría el error *Non-nullable instance field 'nom\_propietat' must be initialized* indicando que es necesario inicializar esta propiedad. Estos valores iniciales los podemos dar en la misma definición de las propiedades.
 
-class NomClasse {
+```dart
+class NombreClase {
+    Tipo1? propiedad1 = valor_inicial_1;
+    Tipo2? propiedad2 = valor_inicial_2; 
+    ...
+}
+```
 
-`    `Tipus1 propietat1=valor\_inicial\_1;
-
-`    `Tipus2 propietat2=valor\_inicial\_2;
-
-...
-
-`    `}
 
 ### **Instanciación de objetos**
 Con el fin de crear un objeto de la clase anterior, podríamos hacerlo con:
 
-NomClasse objecte = Classe(param1, param2);
+```dart
+NombreClase object = NombreClase(param1, param2);
+```
 
-Aunque podemos usar la palabra clave **new** (**new Clase(param1, param2)**), esta es opcional, y cuando trabajamos con Flutter, se recomienda no utilizarla.
+Aunque podemos usar la palabra clave `new` (`new NombreClase(param1, param2)`), esta es opcional, y cuando trabajamos con Flutter, se recomienda no utilizarla.
 
-Por otra parte, si intentamos imprimir el objeto (**print(objeto);**) nos dirá que es una instancia de **NomClasse**. Si lo que queremos es que nos muestre el contenido, deberíamos sobreescribir el método **toString** de la siguiente manera:
+Por otra parte, si intentamos imprimir el objeto (`print(objeto);`) nos dirá que es una instancia de `NombreClase`. Si lo que queremos es que nos muestre el contenido, deberíamos sobreescribir el método `toString` de la siguiente manera:
 
-@override 
+```dart
+    @override 
+    String toString() {
+      return 'Propiedad1: $propiedad1, Propiedad2: $propiedad2';
+    }
+```
 
-String toString() {
 
-`  `return 'Propietat1: $propietat1, Propietat2: $propietat2';
+Hay que decir que, en Dart, la anotación `@override` también es opcional, y podríamos omitirla.
 
-`  `}
+Por otro lado, en expresiones como la anterior debemos tener especial cuidado si optamos por utilizar el `this`. Aunque no es recomendable, si utilizamos este habría que hacer uso de las claves para delimitar el alcance del $, de la siguiente manera:
 
-Hay que decir que, en Dart, la anotación **@override** también es opcional, y podríamos omitirla.
+```dart
+return 'Propiedad1: ${this.propiedad1}, Propiedad2: ${this.propiedad2}';
+```
 
-Por otro lado, en expresiones como la anterior debemos tener especial cuidado si optamos por utilizar el **this**. Aunque no es recomendable, si utilizamos este habría que hacer uso de las claves para delimitar el alcance del $, de la siguiente manera:
-
-return 'Propietat1: ${this.propietat1}, Propietat2: ${this.propietat2}';
-
-Si sólo empleáramos $this.propiedad1 o $this.propedad2 estaríamos intentando imprimir la misma clase ($this), por lo que se invocaría a este método de forma recursiva, entrando pues en un bucle infinito.
+Si sólo empleáramos `$this.propiedad1` o `$this.propedad2` estaríamos intentando imprimir la misma clase (`$this`), por lo que se invocaría a este método de forma recursiva, entrando pues en un bucle infinito.
 
 Un ejemplo más completo de lo que hemos explicado podría ser el siguiente:
 
+```dart
 class Persona {
+    String? nombre;
+    String? apellidos; 
 
-`    `String? nom;
+    Persona(String arg1, String arg2){
+        nombre=arg1;
+        apellidos=arg2;
+    }
 
-`    `String? cognoms; 
-
-`    `Persona(String arg1, String arg2){
-
-`        `nom=arg1;
-
-`        `cognoms=arg2;
-
-`    `}
-
-`  `@override 
-
-`  `String toString() {
-
-`    `return 'Nom: $nom, Cognoms: $cognoms';
-
-`  `}   
-
+  @override 
+  String toString() {
+    return 'Nombre: $nombre, Apellidos: $apellidos';
+  }   
 }
 
 void main (){
-
-`  `Persona objecte=Persona("Luke", "Skywalker");
-
-`  `print(objecte.toString());
-
+  Persona objeto=Persona("Luke", "Skywalker");
+  print(objeto.toString());
 }
+```
 
-Puede comprobar su funcionamiento en el siguiente Gist: <https://dartpad.dev/?id=ef81399b2c2675ff9ead65d16f3b171e>.
+Puede comprobar su funcionamiento en el siguiente Gist: <https://dartpad.dev/?id=89e4c3eb89cf029ee444d8e4f5a5b841>.
+
+<iframe
+  src="https://dartpad.dev/embed-inline.html?id=89e4c3eb89cf029ee444d8e4f5a5b841"
+  width="100%"
+  height="500px"
+  frameborder="0">
+</iframe>
 
 ### **Simplificación del constructor**
-El constructor es pot simplificar de la següent manera:
+El constructor se puede simplificar de la siguiente manera:
 
-NomClasse(this.propietat1, this.propietat2);
+```dart
+NombreClase(this.propiedad1, this.propiedad2);
+```
 
 Con lo cual, además, conseguimos que las propiedades se inicialicen en la misma definición, de manera que no sea necesario declarar éstas como *nullables*.
 
 Para el ejemplo de la clase *Persona* tendríamos:
 
-Persona(this.nom, this.cognoms);
+```dart
+Persona(this.nombre, this.apellidos);
+```
 
 
 ### **Constructores con paso de argumento por nombre**
-También es bastante habitual pasar los parámetros de inicialización del constructor por nombre, en lugar de hacerlo de forma posicional. Esto lo conseguimos con las llaves **{}**:
+También es bastante habitual pasar los parámetros de inicialización del constructor por nombre, en lugar de hacerlo de forma posicional. Esto lo conseguimos con las llaves `{}`:
 
-NomClasse({
+```dart
+NombreClase({
+    required this.propiedad1,
+    required this.propiedad2
+    });
+```
 
-`    `required this.propietat1,
+El uso de la palabra reservada `required` indica la obligatoriedad de incluir el argumento, de manera que evitemos valores nulos. Si no utilizáramos el `required`, sería necesario bien indicar que es una propiedad *nullable* o indicarle un valor predeterminado, bien sea en su definición o bien en los parámetros del constructor:
 
-`    `required this.propietat2
-
-`    `});
-
-El uso de la palabra reservada **required** indica la obligatoriedad de incluir el argumento, de manera que evitemos valores nulos. Si no utilizáramos el **required**, sería necesario bien indicar que es una propiedad *nullable* o indicarle un valor predeterminado, bien sea en su definición o bien en los parámetros del constructor:
-
-// En la definició de la propietat
-
-class NomClasse{
-
-...
-
-`    `Tipus? propietat1; // Propietat Nullable
-
-`    `Tipus propietat2=valor; // Amb valor predeterminat
-
-`    `Tipus propietat3;
-
-...
-
-`    `NomClasse({
-
-`        `this.propietat1, 
-
-`        `this.propietat2,
-
-`        `this.propietat3=valor // Valor predeterminat al constructor
-
-`    `});
-
+```dart
+class NombreClasse{
+    ...
+    Tipo? propiedad1; // Propiedad Nullable
+    Tipo propiedad2=valor; // Con valor predeterminado
+    Tipo propiedad3;
+    ...
+    NomClasse({
+        this.propiedad1, 
+        this.propiedad2,
+        this.propiedad3=valor // Valor predeterminado al constructor
+    });
 }
+```
 
 Cuando definimos una propiedad como no nulable y no vamos a inicializarla en la misma declaración, podemos hacer uso de la palabra reservada late:
 
-<a name="__codelineno-10-1"></a>late Tipo propiedad;
+```dart
+late Tipo propiedad;
+```
 
 Para indicar que esta propiedad se inicializará más adelante. Si el compilador detecta su uso antes de la inicialización nos dará un error. Esto nos permite declarar variables, pero inicializarlas más tarde (por ejemplo, en el constructor)
 
 Sea como sea, de esta manera, cuando creamos un objeto lo haremos con:
 
-NomClasse objecte=NomClasse(
-
-`    `propietat1: valor1,
-
-`    `propietat2: valor2,
-
-...
-
+```dart
+NombreClase objecto=NombreClase(
+    propiedad1: valor1,
+    propiedad2: valor2,
+    ...
 )
+```
 
 Y no importa el orden en que ponemos los argumentos, ya que lo que cuenta ahora es el nombre.
+
+POR HACER!!!!!!!!!!:
 
 Veamos el ejemplo de la clase *Persona* más detallado en el Gist: <https://dartpad.dev/id=438a3989dd9643df3c5eaa97e259ae29>.
 
@@ -916,210 +904,112 @@ Veamos el ejemplo de la clase *Persona* más detallado en el Gist: <https://dart
 ### **Múltiples constructores con nombre (named constructor)**
 Dart no soporta sobrecarga de constructores. Para posibilitar la construcción de objetos mediante diferentes métodos se utilizan los constructores con nombre, que también aportan mayor claridad a las declaraciones. Para definir un constructor con nombre hacemos uso del punto para separar al constructor del nombre:
 
-NomClasse.constructor\_amb\_nom1(llista\_arguments\_1){...}
+```dart
+NombreClase.constructor\_con\_nombre1(lista\_argumentos\_1){...}
 
-NomClasse.constructor\_amb\_nom2(llista\_arguments\_2){...}
+NomClasse.constructor\_con\_nombre2(lista\_argumentos\_2){...}
+```
 
 Veremos un ejemplo de uso concreto de estos constructores en el siguiente apartado.
 
 ### **Inicialización con diccionario**
 Uno de los aspectos más interesantes y comunes en Dart es la creación de objetos a partir de un diccionario o JSON. Por ejemplo:
 
-final objecteJSON={
-
-`    `propietat1: valor1,
-
-`    `propietat2: valor2
-
+```dart
+final objetoJSON={
+    propiedad1: valor1,
+    propiedad2: valor2
 }
+```
 
-Per crear l'objecte, podem crear un constructor amb nom que s'inicialitze a partir d'un JSON, de la següent manera:
 
-class NomClasse{
+Para crear el objeto, podemos crear un constructor con nombre que se inicialice a partir de un JSON, de la siguiente manera:
 
-...
-
-`    `NomClasse.fromJSON( Map <Tipus1, Tipus2> objecteJSON){
-
-`        `propietat1=objecteJSON['propietat1'] ?? "valor\_per\_defecte1",
-
-`        `propietat2=objecteJSON['propietat2'] ?? "valor\_per\_defecte2";
-
-...
-
-`        `}
-
-...
-
+```dart
+class NombreClasse{
+    ...
+    NombreClasse.fromJSON( Map <Tipo1, Tipo2> objetoJSON){
+        propiedad1=objetoJSON['propiedad1'] ?? "valor_por_defecto1",
+        propiedad2=objetoJSON['propiedad2'] ?? "valor_por_defecto2";
+        ...
+        }
+    ...
 }
+```
 
 Veamos los detalles:
 
-- El constructor NomClasse.fromJSON recibe un diccionario (Map) como argumento, que se utilizará para inicializar las propiedades de la instancia.
-- En la declaración del mapa como argumento, definimos los tipos de la clave y el valor (<Tipo1, Tipo2>). Si no se indica, Dart infiere los tipos directamente.
+- El constructor `NomClasse.fromJSON` recibe un diccionario (`Map`) como argumento, que se utilizará para inicializar las propiedades de la instancia.
+- En la declaración del mapa como argumento, definimos los tipos de la clave y el valor (`<Tipo1, Tipo2>`). Si no se indica, Dart infiere los tipos directamente.
 - Dentro del constructor, asignamos valores a las propiedades obteniéndolas del JSON. En caso de que no se encuentre la propiedad en el JSON, con el operador ?? podemos asignar valores por defecto.
 
-También hemos comentado que un constructor con nombre aporta claridad a las definiciones. En este caso, hemos hecho uso de un nombre que indica explícitamente que se utiliza un JSON para crear el objetivo (.fromJSON), pero este nombre podría ser cualquiera.
+También hemos comentado que un constructor con nombre aporta claridad a las definiciones. En este caso, hemos hecho uso de un nombre que indica explícitamente que se utiliza un JSON para crear el objetivo (`.fromJSON`), pero este nombre podría ser cualquiera.
 
 Para crear un objeto de esta manera, ya podemos hacerlo con:
 
-NomClasse elMeuObjecte=NomClasse.fromJSON(objecteJSON)
+```dart
+NombreClase miObjeto=NombreClase.fromJSON(objetoJSON)
+```
 
 **Exemple**
 
 Seguint amb l'exemple sobre la definició de persones, podríem fer ús d'un constructor amb nom de la següent forma:
 
+```dart
 class Persona {
+  ...
 
-...
+  Persona.fromJSON(Map<String, dynamic> objecteJSON) {
+    nombre = objecteJSON['nombre'];
+    apellidos = objecteJSON['apellidos'];
+    anyoNacimiento = objecteJSON['anyoNacimiento'];
+    especie = objecteJSON['especie'] ?? "Humana";
+  }
 
-`  `Persona.fromJSON(Map <String, dynamic> objecteJSON){
-
-`    `nom=objecteJSON['nom'];
-
-`    `cognoms=objecteJSON['cognoms'];
-
-`    `anyNaixement=objecteJSON['anyNaixement'];
-
-`    `especie=objecteJSON['especie'] ?? "Humana";
-
-`  `}
-
-}
-
-void main (){
-
-...
-
-`  `Map <String, dynamic>  myJSON={
-
-`    `"nom": "Han", 
-
-`    `"cognoms":"Solo"
-
-`    `};
-
-`  `Persona p3=Persona.fromJSON(myJSON);
-
-`  `print (p3.toString());
-
-}
-
-Disponemos del ejemplo completo al siguiente Gist: <https://dartpad.dev/?id=21a4a94acecb821196438a3e410cc141>.
-
-class Persona {
-
-`  `// Declaració de propietats
-
-`  `String? nom;
-
-`  `String? cognoms;
-
-`  `String? anyNaixement;
-
-`  `String? especie;
-
-`  `// Constructor principal
-
-`  `Persona(
-
-`      `{required this.nom,
-
-`      `required this.cognoms,
-
-`      `this.anyNaixement,
-
-`      `this.especie = "Humana"});
-
-`  `// Constructor amb nom. Creem un objecte a partir d'un JSON
-
-`  `Persona.fromJSON(Map<String, dynamic> objecteJSON) {
-
-`    `nom = objecteJSON['nom'];
-
-`    `cognoms = objecteJSON['cognoms'];
-
-`    `anyNaixement = objecteJSON['anyNaixement'];
-
-`    `especie = objecteJSON['especie'] ?? "Humana";
-
-`  `}
-
-`  `@override
-
-`  `String toString() {
-
-`    `return '''\nNom: $nom
-
-Cognoms: $cognoms
-
-Any de naixement: $anyNaixement
-
-Espècie: $especie''';
-
-`  `}
+  ...
 
 }
 
 void main() {
+  ...
 
-`  `// Creació d'un objecte Persona a partir de dos atributs
+   Map <String, dynamic>  myJSON={
+    "nombre": "Han", 
+    "apellidos":"Solo"
+    };
 
-`  `Persona p1 = Persona(nom: "Luke", cognoms: "Skywalker");
-
-`  `print(p1.toString());
-
-`  `// Creació d'un objecte Persona a partir de quatre atributs
-
-`  `Persona p2 = Persona(
-
-`      `nom: "Ashoka",
-
-`      `cognoms: "Tano",
-
-`      `anyNaixement: "36ABY",
-
-`      `especie: "Togruta");
-
-`  `print(p2.toString());
-
-`  `// Definició d'un JSON
-
-`  `Map<String, dynamic> myJSON = {"nom": "Han", "cognoms": "Solo"};
-
-`  `// Creació d'un objecte Persona a partir del JSON
-
-`  `Persona p3 = Persona.fromJSON(myJSON);
-
-`  `print(p3.toString());
-
+  Persona p3=Persona.fromJSON(myJSON);
+  print (p3.toString());
 }
+
+```
+
+Disponemos del ejemplo completo al siguiente Gist: <https://dartpad.dev/?id=f7ed2afe29db34a283a786dc6eac2898>.
 
 
 ### **Listas de inicializadores o de inicialización**
 Otra forma en que nos podemos encontrar los constructores en Dart es haciendo uso de listas de inicializadores, consistente en una lista de inicializaciones, separadas por comas que se ejecutan antes del código del constructor. Por ejemplo, el constructor Persona.fromJSON del apartado anterior, podrían haberse expresado con listas de inicialización de la siguiente forma:
 
-`  `Persona.fromJSON(Map <String, dynamic> objecteJSON):
+```dart
+Persona.fromJSON(Map <String, dynamic> objecteJSON):
+    nombre = objetoJSON['nombre'];
+    apellidos = objetoJSON['apellidos'];
+    anyoNacimiento = objetoJSON['anyoNacimiento'];
+    especie = objetoJSON['especie'] ?? "Humana";
 
-`    `nom=objecteJSON['nom'],
-
-`    `cognoms=objecteJSON['cognoms'],
-
-`    `anyNaixement=objecteJSON['anyNaixement'],
-
-`    `especie=objecteJSON['especie'] ?? "Humana";
+```
 
 Como vemos, la única cosa que hemos hecho es eliminar las claves que definían el bloque, y hacer uso de los dos puntos para indicar la lista separada por comas de inicializadores.
 
 **Métodos de acceso**
 
-Dart no contempla palabras reservadas como **public** o **private**. De manera predeterminada, toda propiedad que declaramos será pública. Si lo que queremos es que ésta sea privada, lo indicaremos a su nombre, haciendo que éste comience por el guión bajo \_.
+Dart no contempla palabras reservadas como `public` o `private`. De manera predeterminada, toda propiedad que declaramos será pública. Si lo que queremos es que ésta sea privada, lo indicaremos a su nombre, haciendo que éste comience por el guión bajo `_`.
 
-class NomClasse{
-
-`    `Tipus \_propietatPrivada;
-
+```dart
+class NombreClase{
+  Tipo _propietatPrivada;
 }
+```
 
 Ahora bien, hay que tener en cuenta que este nivel de privacidad es en el ámbito de la librería, o lo que en Kotlin o Java sería un paquete, y representaría la aplicación.
 
@@ -1129,220 +1019,135 @@ Entonces, ¿tiene sentido utilizar modificadores de aceso? Aunque son menos frec
 
 Para crear *getters* y *setters*, lo haremos de la siguiente forma:
 
-tipusRetorn get nomPropietatDerivada {
-
-`    `return càlcul\_de\_la\_propietat;
-
+```dart
+tipoRetorno get nombrePropiedadDerivada {
+    return calculo_de_la_propiedad;
 }
 
-set nomPropietatDerivada (Tipus parametre){
-
-`    `// Actualització de les propietats internes
-
+set nombrePropiedadDerivada (Tipo parametro){
+    // Actualitzación de las propiedades internas
 }
+```
 
-Por ejemplo, si en la clase Persona queremos añadir un campo derivado que siga la edad, podríamos definir los métodos **get** y **set** de la siguiente forma:
+Por ejemplo, si en la clase Persona queremos añadir un campo derivado que siga la edad, podríamos definir los métodos `get` y `set` de la siguiente forma:
 
-` `class Persona {
-
-`  `String? nom; 
-
-`  `int? anyNaixement;
-
-...
-
-`  `int get edat{
-
-`    `// Obtenim la data actual, instanciant un objecte DateTime
-
-`    `DateTime currentTime = DateTime.now();  
-
-`    `// L'any es troba a la propetat year de l'objecte currentTime
-
-`    `return currentTime.year-(anyNaixement ?? 0);
-
-`  `}
-
-`  `set edat (int edat){
-
-`    `// Establim l'any de naixement a partir de l'edat
-
-`    `this.anyNaixement=DateTime.now().year-edat;
-
-`  `}
-
-}
-
-En estos métodos hemos hecho uso de la clase [*DateTime*](https://api.dart.dev/stable/2.18.5/dart-core/DateTime-class.html) que representa datos referentes al tiempo. Con **DateTime.now()** obtenemos el instante actual, a partir del cual podemos obtener el año con la propiedad year.
-
-En este caso, lo que hacemos es *definir* un método **set** y otro **get** que, haciendo uso del año actual y el año de nacimiento, gestionan una *propiedad derivada* que es la edad, de manera que con un objeto de tipo ***Persona*** podríamos hacer uso de edad como si se tratara de una propiedad de la misma clase:
-
-**p.edat=40;**
-
-**print(p.edat);**
-
-Podemos ver el ejemplo completo en el siguiente Gist: <https://dartpad.dev/?id=778bd9b1b8ddd253a6d1e7899b729a06>.
-
+```dart
 class Persona {
+  // Declaració de propietats
+  String? nombre;
+  int? anyoNacimiento;
+  ...
 
-`  `String? nom; 
+   int get edat{
+    // Obtenim la data actual, instanciant un objecte DateTime
+    DateTime currentTime = DateTime.now();  
 
-`  `int? anyNaixement;
+    // L'any es troba a la propetat year de l'objecte currentTime
+    return currentTime.year-(anyoNacimiento ?? 0);
+  }
 
-
-
-`  `// Constructor simplificat amb nom
-
-`  `Persona({
-
-`    `required this.nom, 
-
-`    `required this.anyNaixement});
-
-
-
-`  `int get edat{
-
-`    `// Obtenim la data actual, instanciant un objecte DateTime
-
-`    `DateTime currentTime = DateTime.now();  
-
-
-
-`    `// L'any es troba a la propetat year de l'objecte currentTime
-
-`    `return currentTime.year-(anyNaixement ?? 0);
-
-`  `}
-
-
-
-`  `set edat (int edat){
-
-`    `// Establim l'any de naixement a partir de l'edat
-
-`    `this.anyNaixement=DateTime.now().year-edat;
-
-`  `}
-
+  set edat (int edat){
+    // Establim l'any de naixement a partir de l'edat
+    this.anyoNacimiento=DateTime.now().year-edat;
+  }
+  ...
 }
+```
 
+En estos métodos hemos hecho uso de la clase [*DateTime*](https://api.dart.dev/stable/2.18.5/dart-core/DateTime-class.html) que representa datos referentes al tiempo. Con `DateTime.now()` obtenemos el instante actual, a partir del cual podemos obtener el año con la propiedad `year`.
 
-void main (){
+En este caso, lo que hacemos es *definir* un método `set` y otro `get` que, haciendo uso del año actual y el año de nacimiento, gestionan una *propiedad derivada* que es la edad, de manera que con un objeto de tipo `Persona` podríamos hacer uso de edad como si se tratara de una propiedad de la misma clase:
 
-`  `Persona p=Persona(nom:"Jose", anyNaixement: 1978);
+`p.edat=40;`
 
-`  `print (p.edat);
-
-
-
-`  `// Canviem la propietat derivada "edat"
-
-`  `p.edat=40;
-
-`  `print(p.anyNaixement);
-
-
-
-}
+`print(p.edat);`
 
 
 ## Herencia
 Para que una clase pueda heredarse, necesita tener un constructor vacío, sin argumentos, que será el constructor predeterminado que usarán las subclases. **El resto de constructores, no se heredarán.**
 
-class SuperClasse{
+```dart
+class SuperClase{
+  String propiedad1;
 
-`  `String propietat1;
+  // Constructor por defecto con lista de inicialización.
+  SuperClase():propiedad1="Valor per defecte en la superclasse";
 
-`  `// Constructor per defecte, amb llista d'inincialització
-
-`  `SuperClasse():propietat1="Valor per defecte en la superclasse";
-
-`  `// Constructor amb nom (no s'hereta)
-
-`  `SuperClasse.fromString(String s): this.propietat1=s;
-
+  // Constructor con nombre (no se hereda)
+  SuperClase.fromString(String s): this.propiedad1=s;
 }
+```
 
-Para definir una subclase, haremos uso de la palabra **extends**:
+Para definir una subclase, haremos uso de la palabra `extends`:
 
-class SubClasse extends SuperClasse {
-
-`  `// Els constructors no s'hereten
-
+```dart
+class SubClasse extends SuperClase {
+  // Los constructores no se heredan
 }
+```
 
 Con ello podemos crear instancias de la subclase con:
 
+```dart
 // Instància de la subclasse
-
 SubClasse sc1=SubClasse();
+print("Propiedad 1 de la subclase: ${sc1.propietat1}");
+```
 
-print("Propietat 1 de la subclasse: ${sc1.propietat1}");
+Lo que no podemos hacer, por ejemplo, es utilizar el constructor con nombre fromString en la subclase:
 
-El que no podem fer, per exemple és utilitzar el constructor amb nom fromString a la subclasse:
-
-// Error, el constructor fromString no s'hereta!
-
-SubClasse sc2=SubClasse.fromString("Prova"); 
+```dart
+// Error, el constructor fromString no se hereda!
+SubClase sc2=SubClase.fromString("Prueba"); 
+```
 
 Pero lo que sí podemos hacer, es definir al constructor en la subclase e invocar al constructor de la superclase:
 
-class SubClasse2 extends SuperClasse {
-
-`  `// Constructor amb nom que invoca el constructor
-
-`  `// amb nom de la classe pare.
-
-`  `SubClasse2.fromString(String s): super.fromString(s);
-
+```dart
+class SubClass2 extends SuperClase {
+  // Constructor con nombre que llama al constructor
+  // con nombre de la clase padre.
+  SubClase2.fromString(String s): super.fromString(s);
 }
+```
 
 Ahora sí podemos invocar:
-
+```dart
 SubClasse sc2=SubClasse.fromString("Prova");
+```
 
 ## Clases abstractas
-Como sabemos, las clases abstractas no pueden ser instanciadas, y sirven para definir subclases, que deben implementar necesariamente los métodos indicados en la clase abstracta. Para indicar una clase abstracta, utilizamos la palabra clave **abstract**. Por ejemplo:
+Como sabemos, las clases abstractas no pueden ser instanciadas, y sirven para definir subclases, que deben implementar necesariamente los métodos indicados en la clase abstracta. Para indicar una clase abstracta, utilizamos la palabra clave `abstract`. Por ejemplo:
 
+```dart
 abstract class Figura{
+  int posx;
+  int posy;
 
-`  `int posx;
-
-`  `int posy;
-
-`  `void calculaArea(){
-
-`    `print('Calcul per defecte');
-
-`  `}
-
+  void calculaArea(){
+    print('Calcul per defecte');
+  }
 }
 
-class Rectangle extends Figura {
+class Rectangulo extends Figura {
+  int base;
+  int altura;
 
-`  `int base;
-
-`  `int altura;
-
-`  `@override // Opcional
-
-`  `void calculaArea() {
-
-`    `print (this.base\*this.altura);
-
-`  `}
-
+  @override // Opcional
+  void calculaArea() {
+    print (this.base*this.altura);
+  }
 }
+```
 
 ## Interfaces y Mixins
-Dart introduce el concepto de *interfaz implícita*, consistente en que cualquier clase puede usarse de interfaz. Para declarar que una clase implementa los métodos de otra clase, se utiliza la palabra reservada **implements**.
+Dart introduce el concepto de *interfaz implícita*, consistente en que cualquier clase puede usarse de interfaz. Para declarar que una clase implementa los métodos de otra clase, se utiliza la palabra reservada `implements`.
 
-class ClasseQueImplementaInterficie implements ClasseQueFaDeInterficie{
-
-`  `// Implementació dels mètodes de la Classe que fa d'interficie
-
+```dart
+class ClasseQueImplementaInterface implements ClasseQueHaceDeInterface{
+  // Implementació dels mètodes de la Classe que fa d'interficie
 }
+```
 
 Dart, como la mayoría de lenguajes, tampoco soporta la herencia múltiple. Además, y a diferencia de la mayoría de ellos, tampoco suelen usarse las interfaces como aproximación a este tipo de herencia.
 
@@ -1352,49 +1157,41 @@ Un *mixin* podría definirse como una clase que deriva de otra, pero combinada c
 
 Por ejemplo, si tenemos definidas las claseS A, B y C, con los métodos fA(), fB() y fC() respectivamente:
 
+```dart
 class A{
-
-`  `void fA(){
-
-`    `print ("En A");
-
-`  `}
-
+  void fA(){
+    print ("En A");
+  }
 }
 
 class B{
-
-`  `void fB(){
-
-`    `print ("En B");
-
-`  `}
-
+  void fB(){
+    print ("En B");
+  }
 }
 
 class C{
-
-`  `void fC(){
-
-`    `print ("En C");
-
-`  `}
-
+  void fC(){
+    print ("En C");
+  }
 }
+```
 
 Podemos definir el *mixin* claseMixta como una clase derivada de la clase A, pero *mezclada con* las clases B y C:
 
-mixin ClasseMixta implements A, B, C {}
+```dart
+mixin ClaseMixta implements A, B, C {}
+```
 
 Lo que indica que *ClaseMixta* deriva de la clase A, pero donde tendremos accesibles también las propiedades y métodos de las clases B y C, de manera que podemos hacer lo siguiente:
 
-` `ClasseMixta m=ClasseMixta();
+```dart
+ClaseMixta m=ClaseMixta();
 
-`  `m.fA();
-
-`  `m.fB();
-
-`  `m.fC();
+m.fA();
+m.fB();
+m.fC();
+```
 
 
 <a name="_toc182320557"></a><a name="_toc182320692"></a>
