@@ -1,10 +1,15 @@
-﻿# Unidad 2. El lenguaje Dart
+﻿![Union europea](./images/union_europea.jpeg)  ![Generalitat](./images/generalitat.jpeg) ![Mare Nostrum](./images/mare_nostrum.png)
+
+
+# Unidad 2. El lenguaje Dart
 
 ![Dart](./images/imagen1.png)
 
-El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer una breve introducción a este lenguaje y a sus principales características, con especial atención a la programación orientada a objetos, y a los mecanismos que se ofrecen para la programación asíncrona, de gran importancia en el desarrollo de interfaces dinámicas en Flutter.
+El framework **Flutter** hace uso del lenguaje **Dart**. 
 
-[*1. Introducción a Dart	2*](#_apartado1)
+En esta unidad vamos a hacer una breve introducción a este lenguaje y a sus principales características, con especial atención a la programación orientada a objetos, y a los mecanismos que se ofrecen para la programación asíncrona, de gran importancia en el desarrollo de interfaces dinámicas en Flutter.
+
+[*1. Introducción a Dart*](#_apartado1)
 
 [*2. Tipos de Datos*](#_apartado2)
 
@@ -28,11 +33,12 @@ El framework Flutter hace uso del lenguaje Dart. En esta unidad vamos a hacer un
 # <a name="_apartado1"></a>1. Introducción a Dart
 
 ## El lenguaje Dart
-El lenguaje utilizado para el desarrollo en Flutter es Dart, y por eso antes de entrar con la programación de lleno con el framework, nos familiarizaremos un poco con éste.
 
-Para trabajar con los diferentes ejemplos que veremos en esta unidad, solo tenemos que escribirlos en un fichero de texto con extensión **dart**.
+El lenguaje utilizado para el desarrollo en Flutter es **Dart**, y por eso antes de entrar con la programación de lleno con el framework, nos familiarizaremos un poco con este lenguaje.
 
-`dart nombre\_de\_fichero.dart`
+Para trabajar con los diferentes ejemplos que veremos en esta unidad, solo tenemos que escribirlos en un fichero de texto con extensión **dart** y luego, en el terminal, llamar a el ejecutable dart con el nombre del fichero.
+
+`dart nombre_de_fichero.dart`
 
 Alternativamente, también podemos trabajar con el [Playground de Dart](https://dartpad.dev/). Éste, además, tiene la ventaja que incluye en la misma ventana el editor de código con resaltado de sintaxis y detección de errores, la salida del programa, documentación y algunos ejemplos, tanto con Dart como con Flutter para explorar las diferentes posibilidades de los mismos.
 
@@ -53,19 +59,28 @@ void main(List<String> args){
 
 Vemos algunos detalles de Dart en este código:
 
-- La función **main** no devuelve ningún valor, y aunque el tipo **void** no es obligatorio indicarlo, suele ser una buena práctica hacerlo. 
-- Esta función principal puede recibir argumentos, en forma de lista de cadena de caracteres (**List<String> args**). En caso de que no necesitemos argumentos, podemos usar directamente **void main().**
-- Para comprobar si la lista está vacía, aunque podríamos haber comprobado si su longitud es positiva (**args.length>0**) es más correcto hacer uso de **isNotEmpty**.
-- Los bloques de código deben incluirse entre llaves {}. Cuando el bloque sólo se compone de una línea de código (como es el caso de los dos **print()** al ejemplo), aunque no es obligatorio, también se aconseja hacerlo.
-- Los comentarios se expresan como en otros lenguajes tipo Java o C, con // y /\* ... \*/, según sean de una línea o multilínea. 
-- Para mostrar un mensaje por pantalla empleamos la orden **print()**. Cuando hay variables dentro del texto, aunque podemos usar el operador + para concatenar literales, se recomienda el uso de la interpolación de cadenas (*String interpolation*), haciendo uso del símbolo del $ ($variable) o bien de ${} si tenemos que acotar la interpolación (${variable.propiedad}), tal y como hacemos en *Bash*.
+- La función `main` no devuelve ningún valor, y aunque el tipo `void` no es obligatorio indicarlo, suele ser una buena práctica hacerlo. 
+  
+- Esta función principal puede recibir argumentos, en forma de lista de cadena de caracteres (`List<String> args`). En caso de que no necesitemos argumentos, podemos usar directamente `void main()`.
+  
+- Para comprobar si la lista está vacía, aunque podríamos haber comprobado si su longitud es positiva (`args.length>0`) es más correcto hacer uso de `isNotEmpty`.
+  
+- Los bloques de código deben incluirse entre llaves `{}`. Cuando el bloque sólo se compone de una línea de código (como es el caso de los dos `print()` al ejemplo), aunque no es obligatorio, también se aconseja hacerlo.
+  
+- Los comentarios se expresan como en otros lenguajes tipo Java o C, con `//` y `\* ... \*`, según sean de una línea o multilínea. 
+  
+- Para mostrar un mensaje por pantalla empleamos la orden `print()`. Cuando hay variables dentro del texto, aunque podemos usar el operador + para concatenar literales, se recomienda el uso de la interpolación de cadenas (*String interpolation*), haciendo uso del símbolo del $ (`$variable`) o bien de `${}` si tenemos que acotar la interpolación (`${variable.propiedad}`), tal y como hacemos en *Bash*.
+  
 - Las sentencias en Dart acaban con punto y coma ;
-- Para acceder a las listas, lo podemos hacer directamente con el operador [], como si se tratara de un vector.
+  
+- Para acceder a las listas, lo podemos hacer directamente con el operador `[]`, como si se tratara de un vector.
 
 ### **Entrada y salida**
-Como hemos visto, para mostrar mensajes para la consola podemos hacer uso de la función **print()**, pero esta no es la única forma.
+Como hemos visto, para mostrar mensajes para la consola podemos hacer uso de la función `print()`, pero esta no es la única forma.
 
-Dart provee a través de la biblioteca *dart:io* mecanismos para gestionar la entrada y la entrada a través de consola y teclado, entre otros. Concretamente, para la salida por consola nos provee el método .**write()** de las clases stdout y stderr, correspondiente a la salida estándar y de error respectivamente. En cuanto a la entrada por teclado, podemos hacer uso del método **.readLineSync()** de la clase stdin.
+Dart provee a través de la biblioteca *dart:io* mecanismos para gestionar la entrada y la entrada a través de consola y teclado, entre otros. 
+
+Concretamente, para la salida por consola nos provee el método `write()` de las clases `stdout` y `stderr`, correspondiente a la salida estándar y de error respectivamente. En cuanto a la entrada por teclado, podemos hacer uso del método `readLineSync()` de la clase `stdin`.
 
 Veamos un pequeño ejemplo:
 
@@ -87,9 +102,9 @@ Hola! Cómo te llamas? Jose
 Hola Jose!
 ```
 
-Como podréis apreciar, la principal diferencia entre el método **stdout.write** y **print** es que el primero no arroja un salto de línea al final, mientras **print** sí lo hace.
+Como podréis apreciar, la principal diferencia entre el método `stdout.write` y `print` es que el primero no arroja un salto de línea al final, mientras `print` sí lo hace.
 
-Hay que decir que, la clase Stdin permite al usuario leer datos de la entrada estándar de manera tanto síncrona como asíncrona. Tal y como hemos visto, con el fin de realizar la lectura desde el teclado de forma síncrona, haremos uso del método **readLineSync().**
+Hay que decir que, la clase `Stdin` permite al usuario leer datos de la entrada estándar de manera tanto síncrona como asíncrona. Tal y como hemos visto, con el fin de realizar la lectura desde el teclado de forma síncrona, haremos uso del método `readLineSync()`.
 
 
 # <a name="_apartado2"></a>2. Tipos de Datos
@@ -99,9 +114,9 @@ Los tipos de datos soportados por Dart son:
 - **Numéricos**: enteros (int) y decimales (double),
 - **Cadenas de caracteres**: String
 - **Valores lógicos**: bool
-- **Colecciones de objetos**: Listas (List), Conjuntos (Siete) y diccionarios (Map)
+- **Colecciones de objetos**: Listas (`List`), Conjuntos (`Set`) y diccionarios (`Map`)
 
-Para declarar una variable con Dart podemos utilizar **var**, de manera que el tipo de dato se infiera forma automática a partir del valor dado, o bien indicar directamente el tipo. Una vez se asigna un tipo a una variable, este tipo ya no se puede modificar. Veamos algunos ejemplos:
+Para declarar una variable con Dart podemos utilizar `var`, de manera que el tipo de dato se infiera forma automática a partir del valor dado, o bien indicar directamente el tipo. Una vez se asigna un tipo a una variable, este tipo ya no se puede modificar. Veamos algunos ejemplos:
 
 ```dart
 var dia='jueves';       // Infiere el tipo a String
@@ -116,13 +131,13 @@ int numero2=int.parse(cadena_numero);   // Convierte la cadena "1" a un tipo num
 
 ### **Constantes y finales**
 
-Para definir **constantes** utilizaremos la palabra reservada **const**, con la que declaramos un valor en tiempo de compilación que será inmutable y no podrá ser reasignado:
+Para definir **constantes** utilizaremos la palabra reservada `const`, con la que declaramos un valor en tiempo de compilación que será inmutable y no podrá ser reasignado:
 
 ```
 const curso='Flutter'
 ```
 
-Además, también podemos declarar datos como **final**, para indicar que no podrán ser reasignados. La diferencia con las constantes es que **un objeto declarado como *final*, aunque no pueda ser reasignado, sí es mutable**, es decir, sí pueden cambiar las propiedades internas. Por ejemplo, si definimos una lista como constante, no podremos añadirle elementos, pero si la declaramos como final, aunque no podamos asignarle otra lista, sí podremos añadir elementos.
+Además, también podemos declarar datos como `final`, para indicar que no podrán ser reasignados. La diferencia con las constantes es que **un objeto declarado como `final`, aunque no pueda ser reasignado, sí es mutable**, es decir, sí pueden cambiar las propiedades internas. Por ejemplo, si definimos una lista como constante, no podremos añadirle elementos, pero si la declaramos como final, aunque no podamos asignarle otra lista, sí podremos añadir elementos.
 
 ### **Null Safety y tratamiento de valores nulos**
 
@@ -164,7 +179,7 @@ try{
 }
 ```
 
-- **Operador nulo (??)**: Este operador devuelve el valor resultante de la expresión de la parte izquierda del operador, siempre que no sea nulo. En caso contrario nos devolverá la expresión de la derecha. Podemos verlo como una especie de operador condicional a los valores nulos:
+- **Operador nulo (`??`)**: Este operador devuelve el valor resultante de la expresión de la parte izquierda del operador, siempre que no sea nulo. En caso contrario nos devolverá la expresión de la derecha. Podemos verlo como una especie de operador condicional a los valores nulos:
 
 ```dart
 var nom;
@@ -172,7 +187,7 @@ var nom;
 print(nom ?? "Anónimo");
 ```
 
-- **Asignación consciente de nulos *(null aware assignment)* (?? =)**: Asigna un valor a una variable si ésta tiene valor *nulo*. En caso de que la variable tenga un valor previamente diferente a *null*, no se asignará.
+- **Asignación consciente de nulos *(null aware assignment)* (`?? =`)**: Asigna un valor a una variable si ésta tiene valor *nulo*. En caso de que la variable tenga un valor previamente diferente a *null*, no se asignará.
 
 ```dart
 int? variable1;   // Si no indicamos nullable daría error
@@ -183,7 +198,7 @@ variable1 ??= 15;
 print(variable1); // Muestra "10", ya que variable1 ya tenia valor.
 ```
 
-- **Acceso consciente de nulos *(null-aware access)***(?.): Evita que se lance una excepción cuando se accede a una propiedad o método de un objeto que puede ser nulo.
+- **Acceso consciente de nulos *(null-aware access)***(`?.`): Evita que se lance una excepción cuando se accede a una propiedad o método de un objeto que puede ser nulo.
 
 ```dart
 String? cadena;
@@ -194,13 +209,13 @@ print (cadena?.length);
 
 Dart es un lenguaje que soporta tanto tipado estático como dinámico. Cuando hablamos de **tipado estático** hacemos referencia a que los tipos se asignan *en tiempos de compilación*, por lo que se debe indicar el tipo de variable en la propia declaración, tal y como hemos visto hasta ahora. Ahora bien, Dart también soporta tipado de datos **dinámico**, de manera que hace la comprobación de tipos en *tiempo de ejecución*.
 
-Para ello, se hace uso del tipo **dynamic**, un tipo de dato subyacente a todos los objetos Dart, y que nos permite utilizar tipado dinámico de datos, de manera que la comprobación de estos tipos se realiza en tiempo de ejecución en lugar de tiempo de compilación.
+Para ello, se hace uso del tipo `dynamic`, un tipo de dato subyacente a todos los objetos Dart, y que nos permite utilizar tipado dinámico de datos, de manera que la comprobación de estos tipos se realiza en tiempo de ejecución en lugar de tiempo de compilación.
 
 Tenemos más detalles al artículo [Dart es un lenguaje de programación de tipo estático o dinámico](https://medium.com/@farhanaslam910/dart-is-a-static-or-dynamic-typed-programming-language-3d934c95b7b)
 
 ### **Tipos enumerados**
 
-Los tipos enumerados en Dart (enum), como en otros lenguajes, nos sirven para representar un número fijo de valores constantes.
+Los tipos enumerados en Dart (`enum`), como en otros lenguajes, nos sirven para representar un número fijo de valores constantes.
 
 Por ejemplo, podemos definir un enumerado con los días de la semana:
 
@@ -219,7 +234,7 @@ DiasSemana dia=DiasSemana.lunes;
 Si queremos obtener una lista con los valores del enumerado, haremos uso de `values`:
 
 ```dart
-List<DiesSetmana> = DiesSetmana.values;
+List<DiasSemana> lista = DiasSemana.values;
 ```
 
 Un tipo enumerado, al igual que las clases, debe definirse fuera de cualquier función o clase.
@@ -227,7 +242,7 @@ Un tipo enumerado, al igual que las clases, debe definirse fuera de cualquier fu
 
 # <a name="_apartado3"></a>3. Programación Estructurada
 
-La programación estructurada con Dart se basa en las estructuras condicionales y de repetición habituales: *if.. else*, *switch*, *for*, *forEach* i *while*. Además, también soporta el operador condicional ternario (?).
+La programación estructurada con Dart se basa en las estructuras condicionales y de repetición habituales: *`if..else`*, *`switch`*, *`for`*, *`forEach`* y *`while`*. Además, también soporta el operador condicional ternario (`?`).
 
 Vamos a ver algunos ejemplos comentados de estas estructuras:
 
@@ -283,7 +298,7 @@ void main(List<String> args) {
 Para ejecutar el ejemplo anterior (si lo hemos llamado *ejemplo1.dart*), haremos:
 
 ```
-dart exemple1.dart temp
+dart ejemplo1.dart temp
 ```
 
 Siendo *temp* un valor numérico que represente una temperatura.
@@ -310,7 +325,7 @@ void main(List<String> args) {
   // Utilizamos el método toLowerCase de los
   // strings para pasarlo todo a minúscula.
   switch (diaSemana.toLowerCase()) {
-    case "sabado":
+    case "sábado":
     case "domingo":
       print("No es laborable");
       break;
@@ -319,7 +334,7 @@ void main(List<String> args) {
   }
 }
 ```
-Observad que la forma de operar es la misma que con otros lenguajes como Java, de manera que cuando el valor sobre el que estamos haciendo el switch coincide con uno de los `case`, se ejecuta su contenido hasta encontrar un `break`. De esta manera, comprobamos si el día es *sábado* o *domingo*, y ejecutamos el mismo bloque en ambos casos.
+Observad que la forma de operar es la misma que con otros lenguajes como **C#** o **Java**, de manera que cuando el valor sobre el que estamos haciendo el switch coincide con uno de los `case`, se ejecuta su contenido hasta encontrar un `break`. De esta manera, comprobamos si el día es *sábado* o *domingo*, y ejecutamos el mismo bloque en ambos casos.
 
 
 ## Estructuras repetitivas
@@ -331,9 +346,9 @@ void main(List<String> args) {
   for (int i = 0; i <= 10; i++) {
     //Comprobamos si es par
     if (i.isEven)
-      print("${i} és parell");
+      print("${i} es par");
     else
-      print("${i} és imparell");
+      print("${i} es impar");
   }
 }
 ```
@@ -367,7 +382,6 @@ void main(List<String> args) {
   do {
     // El contenido del bucle se ejecutará 
     // al menos una vez.
-
     if (i.isEven)
       print("${i} és par");
     else
@@ -385,7 +399,7 @@ Dart admite funciones de primer orden, es decir, funciones que no estén vincula
 
 La declaración de funciones se hace de forma muy parecida a otros lenguajes como **C#** o **Kotlin**:
 
-**Función sin argumentos y sin valor de retorno**
+### Función sin argumentos y sin valor de retorno
 
 ```dart
 void funcion(){
@@ -393,19 +407,19 @@ void funcion(){
 }
 ```
 
-**Función con argumentos y sin valor de retorno**
+### Función con argumentos y sin valor de retorno
 
 ```dart
-void funcion(tipus1 argument1, ..., tipusN argumentN){
+void funcion(tipo1 argumento1, ..., tipoN argumentoN){
   // Cuerpo de la función
 }
 ```
 
-**Función con argumentos y con valor de retorno**
+### Función con argumentos y con valor de retorno
 
 ```dart
-tipoRetorno funcio(tipo1 argument1, ..., tipoN argumentN){
-  // Cuerpo de la funció
+tipoRetorno funcion(tipo1 argument1, ..., tipoN argumentN){
+  // Cuerpo de la función
   return ValorDeTipoRetorno;
 }
 ```
@@ -460,7 +474,9 @@ void main(){
 Las funciones en Dart admiten tres tipos de argumentos:
 
 - Argumentos ***posicionales obligatorios***,
+  
 - Argumentos ***posicionales opcionales***, que indicaremos con `[]`, y que pueden tener o no valor predeterminado (si no se especifica será nulo), y 
+  
 - Argumentos ***opcionales con nombre***, que indicaremos con `{}`, y para los que se requerirá indicar el nombre a la hora de la invocación. Cabe destacar que en este tipo de parámetros, el orden en que se indican en la invocación no importa.
 
 Veamos algunos ejemplos:
@@ -494,9 +510,9 @@ void main() {
 Cuando una llamada a función, a un método de un objeto o a un constructor hace uso de varios argumentos con nombre, es habitual separar los diferentes parámetros por líneas. Por ejemplo:
 
 ```dart
-funcioX(
-    paremetre1: valor1,
-    parametre2: valor2
+funcionX(
+    paremetro1: valor1,
+    parametro2: valor2
     ...
 )
 ```
@@ -516,7 +532,7 @@ Dart puede definirse como un lenguaje de alto nivel, y que no recurre a estructu
 
 No obstante, Dart facilita el acceso a listas como si trabajáramos con vectores, al tiempo que nos ofrece funciones de más alto nivel que nos permiten trabajar de manera más cómoda.
 
-### **Creación de listas**
+### Creación de listas
 Vemos algunas formas de definir listas:
 
 ```dart
@@ -537,7 +553,7 @@ List laborables=['lunes' , 'martes', 'miércoles', 'jueves', 'viernes'];
 List<String> festivos=['sábado', 'domingo'];
 ```
 
-### **Manipulación de listas**
+### Manipulación de listas
 
 Y ahora vemos algunas formas de acceder y manipularlas:
 
@@ -622,7 +638,7 @@ print (notas.containsKey("PMDM"));
 
 Con el fin de recorrer los diferentes tipos estructurados podemos hacer uso de bucles for con el operador in, o bien haciendo uso del método forEach. 
 
-**Recorrido de listas** 
+### Recorrido de listas
 
 Si definimos, por ejemplo, la lista:
 
@@ -631,7 +647,7 @@ List laborables=['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 ```
 
 
-Podemos recorrerla con un bucle **for.... in** de la siguiente manera:
+Podemos recorrerla con un bucle `for...in` de la siguiente manera:
 
 ```dart
 for (String dia in laborables) {
@@ -647,7 +663,7 @@ laborables.forEach((dia) {
 });
 ```
 
-El método `forEach` recibe como argumento una función anónima, que se invoca para cada uno de los elementos de la lista. Esta función anónima recibe como argumento el elemento en cuestión, y lo procesa dentro del cuerpo de la función. En este caso, este procesamiento consiste en imprimir el valor.
+El método `forEach` recibe como argumento una **función anónima**, que se invoca para cada uno de los elementos de la lista. Esta función anónima recibe como argumento el elemento en cuestión, y lo procesa dentro del cuerpo de la función. En este caso, este procesamiento consiste en imprimir el valor.
 
 Por otra parte, esta función anónima que proporcionamos al método forEach podría expresarse también como función flecha de la siguiente forma:
 
@@ -656,7 +672,7 @@ laborables.forEach((dia) => print(dia));
 ```
 
 
-**Recorrido de conjuntos** 
+### Recorrido de conjuntos
 
 El recorrido de conjuntos se realiza de la misma manera que las listas. Si definimos el siguiente conjunto a partir de una lista:
 
@@ -679,7 +695,7 @@ Y con `forEach`, haciendo uso de una función flecha, sería:
 laborables.forEach((dia) => print(dia));
 ```
 
-**Recorrido de Maps**
+### Recorrido de Maps
 
 Definimos ahora un diccionario con módulos y sus calificaciones:
 
@@ -701,7 +717,7 @@ En cuanto al método `forEach` de los diccionarios, éste recibe dos argumentos 
 notas.forEach((key, value) => print("Módulo: $key, nota: $value"));
 ```
 
-**Mapeado de estructuras**
+### Mapeado de estructuras
 
 Las colecciones en *Dart* poseen un método `map` para transformar unas estructuras en otras. Para ello, habrá que proporcionarle una función anónima que se aplicará a cada uno de los elementos para obtener el nuevo elemento correspondiente.
 
@@ -756,11 +772,11 @@ class NombreClase {
 
 ```
 
-Veamos algunos detalles. Por un lado, el constructor de la clase es opcional. En caso de que éste no se declare, Dart utiliza un constructor predeterminado sin argumentos. 
+Veamos algunos detalles. Por un lado, el **constructor** de la clase es opcional. En caso de que éste no se declare, Dart utiliza un constructor predeterminado sin argumentos. 
 
 Si incorporamos un constructor a la clase, este se trata de un método con el mismo nombre que la clase y sin tipos, tal y como se hace en Java. 
 
-Fijémonos que en el ejemplo hemos definido las propiedades como *nullables*. En caso de no hacerlo así, el compilador nos daría el error *Non-nullable instance field 'nom\_propietat' must be initialized* indicando que es necesario inicializar esta propiedad. Estos valores iniciales los podemos dar en la misma definición de las propiedades.
+Fijémonos que en el ejemplo hemos definido las propiedades como *nullables*. En caso de no hacerlo así, el compilador nos daría el error *`Non-nullable instance field 'nombre_propiedad' must be initialized`* indicando que es necesario inicializar esta propiedad. Estos valores iniciales los podemos dar en la misma definición de las propiedades.
 
 ```dart
 class NombreClase {
@@ -820,7 +836,8 @@ class Persona {
 
 void main (){
   Persona objeto=Persona("Luke", "Skywalker");
-  print(objeto.toString());
+  print(objeto.toString()); 
+  // print(objeto);
 }
 ```
 
@@ -882,7 +899,7 @@ Cuando definimos una propiedad como no nulable y no vamos a inicializarla en la 
 late Tipo propiedad;
 ```
 
-Para indicar que esta propiedad se inicializará más adelante. Si el compilador detecta su uso antes de la inicialización nos dará un error. Esto nos permite declarar variables, pero inicializarlas más tarde (por ejemplo, en el constructor)
+para indicar que esta propiedad se inicializará más adelante. Si el compilador detecta su uso antes de la inicialización nos dará un error. Esto nos permite declarar variables, pero inicializarlas más tarde (por ejemplo, en el constructor)
 
 Sea como sea, de esta manera, cuando creamos un objeto lo haremos con:
 
@@ -898,12 +915,13 @@ Y no importa el orden en que ponemos los argumentos, ya que lo que cuenta ahora 
 
 
 ### **Múltiples constructores con nombre (named constructor)**
+
 Dart no soporta sobrecarga de constructores. Para posibilitar la construcción de objetos mediante diferentes métodos se utilizan los constructores con nombre, que también aportan mayor claridad a las declaraciones. Para definir un constructor con nombre hacemos uso del punto para separar al constructor del nombre:
 
 ```dart
-NombreClase.constructor\_con\_nombre1(lista\_argumentos\_1){...}
+NombreClase.constructor_con_nombre1(lista_argumentos_1){...}
 
-NomClasse.constructor\_con\_nombre2(lista\_argumentos\_2){...}
+NomClasse.constructor_con_nombre2(lista_argumentos_2){...}
 ```
 
 Veremos un ejemplo de uso concreto de estos constructores en el siguiente apartado.
@@ -936,7 +954,9 @@ class NombreClasse{
 Veamos los detalles:
 
 - El constructor `NomClasse.fromJSON` recibe un diccionario (`Map`) como argumento, que se utilizará para inicializar las propiedades de la instancia.
+  
 - En la declaración del mapa como argumento, definimos los tipos de la clave y el valor (`<Tipo1, Tipo2>`). Si no se indica, Dart infiere los tipos directamente.
+  
 - Dentro del constructor, asignamos valores a las propiedades obteniéndolas del JSON. En caso de que no se encuentre la propiedad en el JSON, con el operador ?? podemos asignar valores por defecto.
 
 También hemos comentado que un constructor con nombre aporta claridad a las definiciones. En este caso, hemos hecho uso de un nombre que indica explícitamente que se utiliza un JSON para crear el objetivo (`.fromJSON`), pero este nombre podría ser cualquiera.
@@ -944,12 +964,12 @@ También hemos comentado que un constructor con nombre aporta claridad a las def
 Para crear un objeto de esta manera, ya podemos hacerlo con:
 
 ```dart
-NombreClase miObjeto=NombreClase.fromJSON(objetoJSON)
+NombreClase miObjeto = NombreClase.fromJSON(objetoJSON)
 ```
 
-**Exemple**
+### Ejemplo
 
-Siguiedno el ejemplo de la definición de personas, podríamos hacer uso de un constructor con nombre de la siguiente forma:
+Siguiendo el ejemplo de la definición de personas, podríamos hacer uso de un constructor con nombre de la siguiente forma:
 
 ```dart
 class Persona {
@@ -982,9 +1002,16 @@ void main() {
 
 Disponemos del ejemplo completo al siguiente Gist: <https://dartpad.dev/?id=f7ed2afe29db34a283a786dc6eac2898>.
 
+<iframe
+  src="https://dartpad.dev/embed-inline.html?id=f7ed2afe29db34a283a786dc6eac2898"
+  width="100%"
+  height="500px"
+  frameborder="0">
+</iframe>
 
 
 ### **Listas de inicializadores o de inicialización**
+
 Otra forma en que nos podemos encontrar los constructores en Dart es haciendo uso de listas de inicializadores, consistente en una lista de inicializaciones, separadas por comas que se ejecutan antes del código del constructor. Por ejemplo, el constructor Persona.fromJSON del apartado anterior, podrían haberse expresado con listas de inicialización de la siguiente forma:
 
 ```dart
@@ -996,9 +1023,9 @@ Persona.fromJSON(Map <String, dynamic> objecteJSON):
 
 ```
 
-Como vemos, la única cosa que hemos hecho es eliminar las claves que definían el bloque, y hacer uso de los dos puntos para indicar la lista separada por comas de inicializadores.
+Como vemos, la única cosa que hemos hecho es eliminar las llaves que definían el bloque, y hacer uso de los dos puntos para indicar la lista separada por comas de inicializadores.
 
-**Métodos de acceso**
+### **Métodos de acceso**
 
 Dart no contempla palabras reservadas como `public` o `private`. De manera predeterminada, toda propiedad que declaramos será pública. Si lo que queremos es que ésta sea privada, lo indicaremos a su nombre, haciendo que éste comience por el guión bajo `_`.
 
@@ -1055,9 +1082,11 @@ En estos métodos hemos hecho uso de la clase [*DateTime*](https://api.dart.dev/
 
 En este caso, lo que hacemos es *definir* un método `set` y otro `get` que, haciendo uso del año actual y el año de nacimiento, gestionan una *propiedad derivada* que es la edad, de manera que con un objeto de tipo `Persona` podríamos hacer uso de edad como si se tratara de una propiedad de la misma clase:
 
-`p.edat=40;`
+```dart
+p.edat=40;
 
-`print(p.edat);`
+print(p.edat);
+```
 
 
 ## Herencia
@@ -1122,7 +1151,7 @@ abstract class Figura{
   int posy;
 
   void calculaArea(){
-    print('Calcul per defecte');
+    print('Cálculo por defecto');
   }
 }
 
@@ -1138,11 +1167,12 @@ class Rectangulo extends Figura {
 ```
 
 ## Interfaces y Mixins
+
 Dart introduce el concepto de *interfaz implícita*, consistente en que cualquier clase puede usarse de interfaz. Para declarar que una clase implementa los métodos de otra clase, se utiliza la palabra reservada `implements`.
 
 ```dart
 class ClasseQueImplementaInterface implements ClasseQueHaceDeInterface{
-  // Implementació dels mètodes de la Classe que fa d'interficie
+  // Implementación de los métodos de la clase que hace de interfaz
 }
 ```
 
@@ -1150,7 +1180,7 @@ Dart, como la mayoría de lenguajes, tampoco soporta la herencia múltiple. Adem
 
 El mecanismo que introduce Dart para crear clases que serían una combinación de otros son los ***mixins***, un concepto más cercano al de heréncia múltiple que el de las interfaces.
 
-Un *mixin* podría definirse como una clase que deriva de otra, pero combinada con otras clases. Para definir un *mixin* hacemos uso de la palabra reservada with.
+Un *`mixin`* podría definirse como una clase que deriva de otra, pero combinada con otras clases. Para definir un *mixin* hacemos uso de la palabra reservada `with`.
 
 Por ejemplo, si tenemos definidas las claseS A, B y C, con los métodos fA(), fB() y fC() respectivamente:
 
@@ -1192,7 +1222,9 @@ m.fC();
 
 # <a name="_apartado7"></a> 7. Programación Asíncrona
 
-En este apartado vamos a abordar uno de los aspectos más complejos y a la vez interesantes del lenguaje Dart: la programación asíncrona. Complejo porque supone un cambio en la concepción tradicional de la programación concurrente, basada en hilos, e interesante porque juega un papel fundamental en la programación reactiva de Flutter.
+En este apartado vamos a abordar uno de los aspectos más complejos y a la vez interesantes del lenguaje Dart: **la programación asíncrona**. 
+
+Complejo porque supone un cambio en la concepción tradicional de la programación concurrente, basada en hilos, e interesante porque juega un papel fundamental en la programación reactiva de Flutter.
 
 ## Programación Asíncrona en Dart
 El asincronismo hace referencia a un modelo de programación donde es posible que determinadas operaciones devuelvan el control de la ejecución al programa que las ha invocado antes de haber terminado. 
@@ -1200,7 +1232,7 @@ El asincronismo hace referencia a un modelo de programación donde es posible qu
 Los lenguajes de programación ofrecen diferentes tipos de mecanismos para tratar esta programación, como puedan ser los threads en Java o las corrutinas en Kotlin, entre muchos otros.
 
 ### **Future**
-Dart y Flutter hacen uso de la clase *Future* y *async/await* para trabajar funciones de forma asíncrona.
+Dart y Flutter hacen uso de la clase *`Future`* y *`async/await`* para trabajar funciones de forma asíncrona.
 
 Los *Futures* definen tipos de datos asociados a tareas asíncronas, que no se resuelven de forma inmediata. Un ejemplo bastante habitual de este tipo de tareas consiste en las peticiones que realizamos a un servidor, que sabemos que obtendrán respuesta en algún momento, pero no sabemos cuándo.
 
@@ -1217,7 +1249,7 @@ Future<String> funcionAsincrona(){
 
 Esta función devuelve un objeto de tipo `Future` al cabo de un segundo, que contendrá un `String`. O siendo más precisos, nos devuelve un objeto de tipo *Future*, que al cabo de un segundo lanzará una función que nos devuelve un *String*.
 
-Para simular la pausa, hemos utilizado el método **delayed** de la clase **Future**. Este método recibe un objeto de tipo Duration como primer argumento, y una función de callback, sin argumentos como segundo. Observe que dentro de esta función de callback se realiza también un returno.
+Para simular la pausa, hemos utilizado el método **`delayed`** de la clase **`Future`**. Este método recibe un objeto de tipo `Duration` como primer argumento, y una función de *callback sin argumentos* como segundo. Observe que dentro de esta función de callback se realiza también un return.
 
 La clase [Duration](https://api.dart.dev/stable/2.18.5/dart-core/Duration-class.html) representa una duración, o lo que es lo mismo, la diferencia entre dos instantes de tiempo. Con el fin de crear un objeto de tipo `Duration`, hacemos uso de su constructor, al que le podemos proporcionar diferentes argumentos por nombre (hours, minutes, seconds..). En el ejemplo, se ha puesto una duración de un segundo, haciendo uso del argumento `seconds`.
 
@@ -1238,7 +1270,7 @@ El resultado que se nos mostrará por pantalla será:
 Inici
 Instance of '_Future<String>'
 Final
-Estem en funcioAsincrona
+Estamos en funcioAsincrona
 ```
 
 Como era de esperar, lo primero que muestra es el texto *Inicio*, correspondiente al primer `print` del programa. Después, se invoca a la función asíncrona y se muestra el resultado que ésta devuelve: `Instance of Future<String>`. Es decir, un objeto de tipo Future, que contendrá *en un futuro* un `String`.
@@ -1259,7 +1291,7 @@ Si lo añadimos al ejemplo:
 
 ```dart
 void main(){
-  print("Inici");
+  print("Inicio");
 
   Future<String> a=funcionAsincrona(); 
 
@@ -1276,10 +1308,10 @@ void main(){
 Veremos que la salida es:
 
 ```
-Inici
+Inicio
 Instance of '_Future<String>'
 Final
-Estem en funcioAsincrona
+Estamos en funcioAsincrona
 Valor de retorn
 ```
 
@@ -1387,11 +1419,11 @@ Los *Streams* fueron introducidos por el equipo de Flutter en la Google I/O de 2
 
 Cuando hablamos de programación reactiva nos referimos a la propagación de los cambios en el estado de la aplicación con el fin de mantener la coherencia de la misma. Así, la aplicación *reacciona* a los cambios a medida que ocurren, y evita tener que realitar las actualizaciones de estado de forma manual.
 
-Atención
+### Atención
 
 De momento vamos a dejar apartados los Streams, para no cargar un tema que ya es potente con lo visto hasta aquí.
 
-Los retomaremos en el futuro si es necesario.
+Los retomaremos en el futuro.
 
 
 # <a name="_apartado8"></a>8. Proyectos en Dart 
@@ -1404,18 +1436,18 @@ Cuando nuestro programa crece y debemos dividir su funcionalidad en diversos fic
 Si ejecutamos directamente `dart create` podremos ver las diferentes opciones que nos ofrece. En nuestro caso, y a modo de ejemplo que continuaremos en el siguiente apartado, crearemos un proyecto sencillo de consola que llamaremos `info_provincies` (recuerde que, en Dart, los proyectos no pueden tener mayúsculas). Para ello, dentro de la carpeta donde queramos almacenar nuestros proyectos, escribiremos la orden:
 
 ```
-dart create -t console-simple projecte\exemple
+dart create -t console-simple proyecto_ejemplo
 ```
 
-Esto nos generará una estructura de proyecto Dart habitual en la carpeta `projecte_exemple`, donde lo que más nos interesa es el fichero con las propiedades del proyecto (*pubspec.yaml*) y el directorio con el código fuente (*bin* en el caso de Dart).
+Esto nos generará una estructura de proyecto Dart habitual en la carpeta `proyecto_ejemplo`, donde lo que más nos interesa es el fichero con las propiedades del proyecto (*pubspec.yaml*) y el directorio con el código fuente (*bin* en el caso de Dart).
 
 Si consultamos la carpeta generada veremos que contiene el siguiente contenido:
 
 ```
-projecte_exemple
+proyecto_ejemplo
 ├── analysis_options.yaml
 ├── bin
-│   └── projecte_exemple.dart
+│   └── proyecto_ejemplo.dart
 ├── CHANGELOG.md
 ├── pubspec.lock
 ├── pubspec.yaml
@@ -1424,9 +1456,10 @@ projecte_exemple
 
 Donde además del `pubspec` y la carpeta `bin` encontramos un fichero para el control de cambios (`changelog`) un fichero readme o un .`gitignore`, entre otros.
 
-Cuando trabajamos con Flutter, veremos que la estructura del proyecto es muy parecida, ya que un proyecto Flutter también es un proyecto Dart. La principal diferencia que encontraremos será que el código fuente estará ubicado en la carpeta lib en lugar de bin.
+Cuando trabajamos con Flutter, veremos que la estructura del proyecto es muy parecida, ya que un proyecto Flutter también es un proyecto Dart. La principal diferencia que encontraremos será que el código fuente estará ubicado en la carpeta `lib` en lugar de `bin`.
 
 ### **Paquetes y librerías: El gestor pub**
+
 Dart hace uso de *paquetes* con el fin de gestionar software compartido, como puedan ser las bibliotecas u otros paquetes de utilidades.
 
 El gestor de paquetes que utiliza Dart es `pub`, y nos permite cargar paquetes desde el sistema de ficheros locales o repositorios *Git*. No obstante, generalmente haremos uso del repositorio de paquetes público *pub.dev*. El gestor *pub* se encargará también de gestionar y descargar las dependencias entre paquetes, teniendo en cuenta la versión del SDK.
@@ -1435,7 +1468,7 @@ La mayoría de los IDE que permiten trabajar con Dart ofrecen soporte para utili
 
 Con el fin de añadir dependencias a un proyecto, podemos directamente editar este fichero *pubspec.yaml*, o bien utilizar el orden dart pub add.
 
-Por ejemplo, añadiremos al proyecto `projecte_exemple` la dependencia de la [librería http](https://pub.dev/packages/http), que utilizaremos en el siguiente apartado, y que se encarga de realizar y gestionar peticiones HTTP en la web. Para ello, tenemos varias opciones:
+Por ejemplo, añadiremos al proyecto `proyecto_ejemplo` la dependencia de la [librería http](https://pub.dev/packages/http), que utilizaremos en el siguiente apartado, y que se encarga de realizar y gestionar peticiones HTTP en la web. Para ello, tenemos varias opciones:
 
 - **Opción 1. Añadir la librería desde la línea de órdenes**
 
@@ -1485,9 +1518,10 @@ Si examinamos algún proyecto de Dart, veremos que hay un directorio oculto llam
 
 # <a name="_apartado9"></a>9. Peticiones HTTP
 
-En aquest apartat realitzarem amb Dart algunes consultes a la Web, fent ús de la llibreria HTTP que hem instal·lat anteriorment.
+En este apartado realizaemos con Dart algunas consultas a la Web, utilizando la librería HTTO que instalamos en el apartado anterior.
 
 ## La llibrería [HTTP](https://pub.dev/packages/http)
+
 En el apartado anterior ya hemos visto cómo incorporar la librería HTTP a nuestro proyecto, la cual nos permitirá llevar a cabo peticiones HTTP a cualquier recurso de red, haciendo uso de *Futures*.
 
 La librería HTTP, internamente define un conjunto de clases y funciones de alto nivel para el consumo de recursos HTTP, como puedan ser las funciones `get()`, `post()`, `update()`, `put()` o `delete()`, entre muchas otras.
@@ -1506,18 +1540,20 @@ Otra opción bastante frecuente es definir un espacio de nombres como un *alias*
 import 'package:http/http.dart' as http;
 ```
 
-De manera que accedim a les funcionalitats que s'ofereixen com si es tractara de mètodes de l'espai de noms *http*: `http.get()`, `http.post()`, etc.
+De manera que accedemos a las funcionalidades que se nos ofrecen como si se trataran métodos del espacio de nombres *http*: `http.get()`, `http.post()`, etc.
 
 ## Ejemplo de uso
 Vamos a hacer de los siguientes recursos en la web que nos ofrecen información sobre las diferentes comarcas de nuestro territorio:
 
 - https://node-comarques-rest-server-production.up.railway.app/api/comarques y https://node-comarques-rest-server-production.up.railway.app/api/comarques/provincies, que nos ofrece una lista de las tres provincias de la comunidad.
+  
 - https://node-comarques-rest-server-production.up.railway.app/api/comarques/[València|Alacant|Castelló]: que nos ofrece una lista de las comarcas de cada una de las provincias (Valencia, Alicante o Castellón), y
+  
 - https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/{Comarca}: que nos ofrece información sobre la comarca indicada.
 
 A continuación, veremos, a modo de ejemplo, cómo obtendríamos un listado de las comarcas de una provincia concreta.
 
-Para ello, en nuestro proyecto podemos editar el fichero `bin/projecte_exemple.dart` y añadimos el siguiente código:
+Para ello, en nuestro proyecto podemos editar el fichero `bin/proyecto_ejemplo.dart` y añadimos el siguiente código:
 
 ```dart
 // Importamos las librerías necesarias
@@ -1554,8 +1590,9 @@ Si ahora ejecutamos el proyecto con `dart run`, obtendremos la lista de comarcas
 Aunque el código está bastante comentado, vamos a hacer algunas puntualizaciones:
 
 - Observemos que hemos importado dos librerías: ***convert*** y ***http***. La librería ***convert***, es una librería estándar de Dart, y no hemos tenido que descargarla. Para indicar que se trata de una librería estándar, ponemos por delante **dart**:. Por otro lado, la libería HTTP, sí la hemos descargado como paquete, y por eso cuando la importamos ponemos **package** delante.
-- Cuando hacemos la petición GET (**http.get()**), se nos devuelve un *Future*, que procesamos con then. El objeto de tipo Response al que se resuelve este *Future* contiene el código de estado de la petición HTTP (**statusCode**). Cuando este código es *200 (OK)*, indica que la petición se ha atendido correctamente, y que, por tanto, en la propiedad **body** disponemos de la respuesta. Este código puede indicar también errores en la petición (4xx, como el 404 Not Found), o errores internos del servidor (5xx).
-- Para descodificar el JSON que nos devuelve como respuesta, lo hemos hecho en dos pasos. En primer lugar, descodificamos la respuesta en formato UTF8, para descodificar caracteres. Especiales:
+  
+- Cuando hacemos la petición GET (`http.get()`), se nos devuelve un *`Future`*, que procesamos con `then`. El objeto de tipo `Response` al que se resuelve este *Future* contiene el código de estado de la petición HTTP (**`statusCode`**). Cuando este código es *200 (OK)*, indica que la petición se ha atendido correctamente, y que, por tanto, en la propiedad **`body`** disponemos de la respuesta. Este código puede indicar también errores en la petición (4xx, como el 404 Not Found), o errores internos del servidor (5xx).
+- Para descodificar el JSON que nos devuelve como respuesta, lo hemos hecho en dos pasos. En primer lugar, descodificamos la respuesta en formato UTF8, para descodificar caracteres especiales:
 
 ```dart
 String body = utf8.decode(data.bodyBytes);
@@ -1567,9 +1604,9 @@ Y luego descodificamos este String que se nos devuelve como un JSON, al que le h
 final bodyJSON = jsonDecode(body) as List;
 ```
 
-\* En caso de obtener este último bodyJSON sin pasar previamente por la descodificación en UTF8, (`bodyJSON = jsonDecode(data.body) as List`);, nos aparecerían caracteres extraños en lugar de los acentos.
+En caso de obtener este último bodyJSON sin pasar previamente por la descodificación en UTF8, (`bodyJSON = jsonDecode(data.body) as List;`), nos aparecerían caracteres extraños en lugar de los acentos.
 
-## Ejemplo con async/Await
+## Ejemplo con async/await
 
 En el ejemplo anterior la respuesta HTTP se nos devuelve en un *Future* de manera asíncrona. Si lo que queremos es esperarnos a obtener la respuesta directamente, sin hacer uso del mismo, podríamos lanzar la petición incorporando un `await`:
 
