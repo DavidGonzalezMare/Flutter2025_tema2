@@ -28,7 +28,8 @@ En esta unidad vamos a hacer una breve introducción a este lenguaje y a sus pri
 [*9. Peticiones HTTP*](#_apartado9)
 
 
-
+<br>
+<br>
 
 # <a name="_apartado1"></a>1. Introducción a Dart
 
@@ -48,11 +49,11 @@ Como muchos otros lenguajes, Dart utiliza la función *main* como punto de entra
 
 ```dart
 void main(List<String> args){
-  // Exemple d'Hola Món
+  // Ejemplo de Hola Mundo
     if (args.isNotEmpty) {
       print ("Hola ${args[0]}");
     } else  {
-      print("Hola món!");
+      print("Hola mundo!");
     } 
 }
 ```
@@ -67,7 +68,7 @@ Vemos algunos detalles de Dart en este código:
   
 - Los bloques de código deben incluirse entre llaves `{}`. Cuando el bloque sólo se compone de una línea de código (como es el caso de los dos `print()` al ejemplo), aunque no es obligatorio, también se aconseja hacerlo.
   
-- Los comentarios se expresan como en otros lenguajes tipo Java o C, con `//` y `\* ... \*`, según sean de una línea o multilínea. 
+- Los comentarios se expresan como en otros lenguajes tipo Java o C, con `//` y `/* ... */`, según sean de una línea o multilínea. 
   
 - Para mostrar un mensaje por pantalla empleamos la orden `print()`. Cuando hay variables dentro del texto, aunque podemos usar el operador + para concatenar literales, se recomienda el uso de la interpolación de cadenas (*String interpolation*), haciendo uso del símbolo del $ (`$variable`) o bien de `${}` si tenemos que acotar la interpolación (`${variable.propiedad}`), tal y como hacemos en *Bash*.
   
@@ -106,6 +107,8 @@ Como podréis apreciar, la principal diferencia entre el método `stdout.write` 
 
 Hay que decir que, la clase `Stdin` permite al usuario leer datos de la entrada estándar de manera tanto síncrona como asíncrona. Tal y como hemos visto, con el fin de realizar la lectura desde el teclado de forma síncrona, haremos uso del método `readLineSync()`.
 
+<br>
+<br>
 
 # <a name="_apartado2"></a>2. Tipos de Datos
 
@@ -239,6 +242,9 @@ List<DiasSemana> lista = DiasSemana.values;
 
 Un tipo enumerado, al igual que las clases, debe definirse fuera de cualquier función o clase.
 
+<br>
+<br>
+
 
 # <a name="_apartado3"></a>3. Programación Estructurada
 
@@ -290,7 +296,7 @@ void main(List<String> args) {
   temperatura > 21 ? print("Hace calor") : print("Hace frío");
 
   // Ejemplo de if ternario como expresión para asignar a variable
-  var text = temperatura > 21 ? "HAce calor" : "Hace frío";
+  var text = temperatura > 21 ? "Hace calor" : "Hace frío";
   print(text);
 }
 ```
@@ -302,6 +308,8 @@ dart ejemplo1.dart temp
 ```
 
 Siendo *temp* un valor numérico que represente una temperatura.
+
+<br>
 
 **Ejemplo 2: El operador switch**
 
@@ -336,8 +344,10 @@ void main(List<String> args) {
 ```
 Observad que la forma de operar es la misma que con otros lenguajes como **C#** o **Java**, de manera que cuando el valor sobre el que estamos haciendo el switch coincide con uno de los `case`, se ejecuta su contenido hasta encontrar un `break`. De esta manera, comprobamos si el día es *sábado* o *domingo*, y ejecutamos el mismo bloque en ambos casos.
 
+<br>
 
 ## Estructuras repetitivas
+
 **Ejemplo 1: Uso de for**
 
 ```dart
@@ -391,6 +401,9 @@ void main(List<String> args) {
 }
 ```
 
+<br>
+<br>
+
 # <a name="_apartado4"></a>4. Funciones
 
 ## Declaración de funciones
@@ -424,6 +437,7 @@ tipoRetorno funcion(tipo1 argument1, ..., tipoN argumentN){
 }
 ```
 
+<br>
 
 ## Funciones anónimas y funciones flecha
 
@@ -468,6 +482,7 @@ void main(){
   print (funcion(3, 4, (arg1, arg2) => arg1+arg2));
 }
 ```
+<br>
 
 ## Argumentos posicionales obligatorios, opcionales y con nombre
 
@@ -519,10 +534,14 @@ funcionX(
 
 Como veremos posteriormente, esta será una construcción muy común cuando generemos componentes visuales con Flutter.
 
+<br>
+<br>
 
 # <a name="_apartado5"></a>5. Colecciones
 
 Las colecciones son objetos que representan un grupo de elementos, y pueden tener diferentes estructuras y comportamientos. Las colecciones más habituales son las listas, los conjuntos y los mapas.
+
+<br>
 
 ## Listas
 
@@ -539,7 +558,7 @@ Vemos algunas formas de definir listas:
 // Lista nula
 List lista_nula;
 
-// Llista Vacía
+// Lista Vacía
 List listaVacia=[];
 
 // Lista vacía especificando el tipo
@@ -582,6 +601,8 @@ print (diasSemana);
 ```
 En este último punto, para poder utilizar `addAll`, necesitamos que la lista haya sido inicializada (no sea null).
 
+<br>
+
 ## Sets (Conjuntos)
 
 Otra colección de elementos interesante en Dart son los `Sets` o conjuntos, que, a diferencia de las listas, no mantienen los elementos indexados y evitan así elementos duplicados.
@@ -602,6 +623,8 @@ modulos.remove("EIE");
 print (modulos.contains("EIE"));
 ```
 
+<br>
+
 ## Maps (Diccionarios)
 
 Un diccionario es una estructura de datos que almacena pares clave-valor, de manera parecida a un `JSON`.
@@ -617,7 +640,7 @@ notas={ "PMDM": 8, "AD": 9, "PSP":9, "DI":7};
 print(notas["PMDM"]);
 notas["DI"]=9;
 
-// Definición del mapa especificando els tipo:
+// Definición del mapa especificando los tipos:
 Map<String, int> mapa2;
 
 // Definición del mapa especificando un tipo dinámico para el valor
@@ -633,6 +656,8 @@ notas.remove("PMDM");
 // Para saber si un elemento existe
 print (notas.containsKey("PMDM"));
 ```
+
+<br>
 
 ## Recorrido de estructuras
 
@@ -748,7 +773,10 @@ El artículo [*Top 10 métodos para manipular colecciones en Dart*](https://www.
 El codelab de Dart sobre iterables: <https://dart.dev/codelabs/iterables>
 
 
-  # <a name="_apartado6"></a>6. Programación Orientada a Objetos
+<br>
+<br>
+
+# <a name="_apartado6"></a>6. Programación Orientada a Objetos
 
 La orientación a objetos es de gran importancia en Dart, y sobre todo en Flutter, ya que en estos conceptos se basará todo el diseño de interfaces mediante *widgets*.
 
@@ -763,9 +791,9 @@ class NombreClase {
     ...
 
     // Constructor (opcional)
-    NomClasse(Tipo1 arg1, Tipo2 arg2,...){
-        propiedad1=arg1; // Podem utilitzar this.propietat1, però no es recomana
-        propiedad2=arg2; // D'igual manaera amb this.propietat2
+    NombreClase(Tipo1 arg1, Tipo2 arg2,...){
+        propiedad1=arg1; // Podemos utilizar this.propiedad1, pero no se recomienda
+        propiedad2=arg2; 
         ...
     }
 }
@@ -1053,7 +1081,7 @@ set nombrePropiedadDerivada (Tipo parametro){
 }
 ```
 
-Por ejemplo, si en la clase Persona queremos añadir un campo derivado que siga la edad, podríamos definir los métodos `get` y `set` de la siguiente forma:
+Por ejemplo, si en la clase Persona queremos añadir un campo derivado que sea la edad, podríamos definir los métodos `get` y `set` de la siguiente forma:
 
 ```dart
 class Persona {
@@ -1088,6 +1116,7 @@ p.edat=40;
 print(p.edat);
 ```
 
+<br>
 
 ## Herencia
 Para que una clase pueda heredarse, necesita tener un constructor vacío, sin argumentos, que será el constructor predeterminado que usarán las subclases. **El resto de constructores, no se heredarán.**
@@ -1097,7 +1126,7 @@ class SuperClase{
   String propiedad1;
 
   // Constructor por defecto con lista de inicialización.
-  SuperClase():propiedad1="Valor per defecte en la superclasse";
+  SuperClase():propiedad1="Valor per defecto en la superclasse";
 
   // Constructor con nombre (no se hereda)
   SuperClase.fromString(String s): this.propiedad1=s;
@@ -1141,6 +1170,7 @@ Ahora sí podemos invocar:
 ```dart
 SubClasse sc2=SubClasse.fromString("Prova");
 ```
+<br>
 
 ## Clases abstractas
 Como sabemos, las clases abstractas no pueden ser instanciadas, y sirven para definir subclases, que deben implementar necesariamente los métodos indicados en la clase abstracta. Para indicar una clase abstracta, utilizamos la palabra clave `abstract`. Por ejemplo:
@@ -1165,6 +1195,8 @@ class Rectangulo extends Figura {
   }
 }
 ```
+
+<br>
 
 ## Interfaces y Mixins
 
@@ -1219,6 +1251,8 @@ m.fA();
 m.fB();
 m.fC();
 ```
+<br>
+<br>
 
 # <a name="_apartado7"></a> 7. Programación Asíncrona
 
@@ -1227,6 +1261,7 @@ En este apartado vamos a abordar uno de los aspectos más complejos y a la vez i
 Complejo porque supone un cambio en la concepción tradicional de la programación concurrente, basada en hilos, e interesante porque juega un papel fundamental en la programación reactiva de Flutter.
 
 ## Programación Asíncrona en Dart
+
 El asincronismo hace referencia a un modelo de programación donde es posible que determinadas operaciones devuelvan el control de la ejecución al programa que las ha invocado antes de haber terminado. 
 
 Los lenguajes de programación ofrecen diferentes tipos de mecanismos para tratar esta programación, como puedan ser los threads en Java o las corrutinas en Kotlin, entre muchos otros.
@@ -1268,7 +1303,7 @@ El resultado que se nos mostrará por pantalla será:
 
 ```
 Inici
-Instance of '_Future<String>'
+Instance of 'Future<String>'
 Final
 Estamos en funcioAsincrona
 ```
@@ -1337,7 +1372,7 @@ Además, cuando utilizamos un `await` dentro de una función (incluso la funció
 void main() async {
   print("Inici");
 
-  String a=await funcioAsincrona(); 
+  String a=await funcionAsincrona(); 
   print(a);
 
   print("Final");
@@ -1414,6 +1449,8 @@ Disponemos de información adicional sobre el Evento Loop en los siguientes art�
 
 Además, también tenéis a vuestra disposición el siguiente *codelab* sobre *Futures* y *Async/Await* de la documentación oficial de Dart: <https://dart.dev/codelabs/async-await>
 
+<br>
+
 ## Streams
 Los *Streams* fueron introducidos por el equipo de Flutter en la Google I/O de 2018, y constituyen el principal componente de la programación reactiva en Flutter.
 
@@ -1425,6 +1462,8 @@ De momento vamos a dejar apartados los Streams, para no cargar un tema que ya es
 
 Los retomaremos en el futuro.
 
+<br>
+<br>
 
 # <a name="_apartado8"></a>8. Proyectos en Dart 
 
@@ -1515,6 +1554,8 @@ La idea es que, como hay varios paquetes que pueden utilizar la misma versión d
 
 Si examinamos algún proyecto de Dart, veremos que hay un directorio oculto llamado `.dart\tool` que contiene un fichero `package\config.json`. Este fichero contiene información sobre las librerías que necesita el proyecto, las versiones, y en qué ubicación de esta *caché* se encuentran. La ubicación más habitual de la misma está en el directorio `~/.pub-cache/hosted/pub.dartlang.org/` de nuestra carpeta personal.
 
+<br>
+<br>
 
 # <a name="_apartado9"></a>9. Peticiones HTTP
 
@@ -1545,11 +1586,11 @@ De manera que accedemos a las funcionalidades que se nos ofrecen como si se trat
 ## Ejemplo de uso
 Vamos a hacer de los siguientes recursos en la web que nos ofrecen información sobre las diferentes comarcas de nuestro territorio:
 
-- https://node-comarques-rest-server-production.up.railway.app/api/comarques y https://node-comarques-rest-server-production.up.railway.app/api/comarques/provincies, que nos ofrece una lista de las tres provincias de la comunidad.
+- [https://node-comarques-rest-server-production.up.railway.app/api/comarques/provincies](https://node-comarques-rest-server-production.up.railway.app/api/comarques/provincies), que nos ofrece una lista de las tres provincias de la comunidad.
   
-- https://node-comarques-rest-server-production.up.railway.app/api/comarques/[València|Alacant|Castelló]: que nos ofrece una lista de las comarcas de cada una de las provincias (Valencia, Alicante o Castellón), y
+- [https://node-comarques-rest-server-production.up.railway.app/api/comarques/](https://node-comarques-rest-server-production.up.railway.app/api/comarques/) seguido de *València*, *Alacant* o *Castelló*: que nos ofrece una lista de las comarcas de cada una de las provincias (Valencia, Alicante o Castellón), y
   
-- https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/{Comarca}: que nos ofrece información sobre la comarca indicada.
+- [https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/](https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/){Comarca}: que nos ofrece información sobre la comarca indicada.
 
 A continuación, veremos, a modo de ejemplo, cómo obtendríamos un listado de las comarcas de una provincia concreta.
 
