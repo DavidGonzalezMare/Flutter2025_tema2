@@ -1085,21 +1085,21 @@ Por ejemplo, si en la clase Persona queremos añadir un campo derivado que sea l
 
 ```dart
 class Persona {
-  // Declaració de propietats
+  // Declaración de propiedades
   String? nombre;
   int? anyoNacimiento;
   ...
 
-   int get edat{
-    // Obtenim la data actual, instanciant un objecte DateTime
+   int get edad{
+    // Obtenemos la fecha actual, instanciamos un objecto DateTime
     DateTime currentTime = DateTime.now();  
 
-    // L'any es troba a la propetat year de l'objecte currentTime
+    // El año se encuentra en la propiedad year del objeto currentTime
     return currentTime.year-(anyoNacimiento ?? 0);
   }
 
-  set edat (int edat){
-    // Establim l'any de naixement a partir de l'edat
+  set edad (int edad){
+    // Establecemos el año de nacimiento a partir de la edad
     this.anyoNacimiento=DateTime.now().year-edat;
   }
   ...
@@ -1590,7 +1590,7 @@ Vamos a hacer de los siguientes recursos en la web que nos ofrecen información 
   
 - [https://node-comarques-rest-server-production.up.railway.app/api/comarques/](https://node-comarques-rest-server-production.up.railway.app/api/comarques/) seguido de *València*, *Alacant* o *Castelló*: que nos ofrece una lista de las comarcas de cada una de las provincias (Valencia, Alicante o Castellón), y
   
-- [https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/](https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/){Comarca}: que nos ofrece información sobre la comarca indicada.
+- [https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/](https://node-comarques-rest-server-production.up.railway.app/api/comarques/infoComarca/xxxxxxxxxx){Comarca}: que nos ofrece información sobre la comarca indicada.
 
 A continuación, veremos, a modo de ejemplo, cómo obtendríamos un listado de las comarcas de una provincia concreta.
 
